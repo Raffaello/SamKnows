@@ -1,0 +1,46 @@
+---
+title: "Report"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Loading CSV Data
+
+Loading and cleaning the dataset
+
+```{r}
+csv <- read.csv("data/data_engineering.csv")
+## unique entries and duplicates
+
+uniques <- unique(csv)
+duplicates <- csv[duplicated(csv),]
+```
+
+## Plots
+
+Pie chart about successes and failures
+
+```{r pie, echo=FALSE}
+# pie chart
+successes <- sum(uniques$successes)
+failures <- sum(uniques$failures)
+slices <- c(successes, failures)
+labels <- c("Successes", "Failures")
+pct <- round(slices/sum(slices)*100)
+labels <- paste(labels, pct)
+labels <- paste(labels, "%", sep="")
+pie(slices, labels, main="Success Ratio")
+```
+
+## Average bytes transfer on failures
+
+```{r, echo=FALSE}
+fails <- uniques[uniques$failures == 1,]
+fails_ratio <- fails$bytes_total / fails$bytes_per_second
+fails_ratio[is.nan(fails_ratio)] <- 0
+mean_fails <- mean(fails_ratio)
+print(mean_fails)
+```

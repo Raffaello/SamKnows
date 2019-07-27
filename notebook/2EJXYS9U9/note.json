@@ -1,0 +1,599 @@
+{
+  "paragraphs": [
+    {
+      "text": "%spark\nval csvData \u003d spark.read.format(\"csv\").option(\"header\", true).option(\"inferSchema\", true).load(\"data/data_engineering.csv\")\n\nprintln(\"total rows: \" + csvData.count())\ncsvData.show(10)\ncsvData.createOrReplaceTempView(\"ingestion_view\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-27 20:48:05.515",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "total rows: 348767\n+--------------------+--------------------+-----------+----------------+---------+--------+----------+\n|measurement_datetime|   device_identifier|bytes_total|bytes_per_second|successes|failures|fetch_time|\n+--------------------+--------------------+-----------+----------------+---------+--------+----------+\n| 2019-01-05 04:57:21|45ce9eb2-2c36-11e...|  369170496|     3.6916699E7|        1|       0|  10000095|\n| 2019-01-05 23:34:36|7b8c5fb3-9f33-11e...|  117293792|     1.1717693E7|        1|       0|  10009973|\n| 2019-01-05 21:15:39|0bebf443-9cd8-11e...|  372999544|      3.726338E7|        1|       0|  10009815|\n| 2019-01-05 20:02:33|45ce9eb2-2c36-11e...|  281369568|     2.8136712E7|        1|       0|  10000087|\n| 2019-01-05 06:26:41|485ad193-2c35-11e...|  371844952|     3.7181822E7|        1|       0|  10000719|\n| 2019-01-05 10:57:30|45ce9eb2-2c36-11e...|  361668408|     3.6155954E7|        1|       0|  10003011|\n| 2019-01-05 22:30:47|485ad193-2c35-11e...|  365926976|     3.6592006E7|        1|       0|  10000189|\n| 2019-01-05 19:16:57|0bebf443-9cd8-11e...|  372996760|     3.7262224E7|        1|       0|  10010051|\n| 2019-01-05 06:34:27|84240f69-b6c6-11e...|  588249672|     5.8769213E7|        1|       0|  10009487|\n| 2019-01-05 14:59:14|6a33a635-b4da-11e...|  582565168|     5.8198278E7|        1|       0|  10010007|\n+--------------------+--------------------+-----------+----------------+---------+--------+----------+\nonly showing top 10 rows\n\ncsvData: org.apache.spark.sql.DataFrame \u003d [measurement_datetime: timestamp, device_identifier: string ... 5 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d0",
+            "http://172.17.0.2:4040/jobs/job?id\u003d1",
+            "http://172.17.0.2:4040/jobs/job?id\u003d2",
+            "http://172.17.0.2:4040/jobs/job?id\u003d3"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1564248069033_-1898438543",
+      "id": "20190727-172109_54445028",
+      "dateCreated": "2019-07-27 17:21:09.033",
+      "dateStarted": "2019-07-27 20:48:05.614",
+      "dateFinished": "2019-07-27 20:48:31.375",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\ncsvData.groupBy(\"device_identifier\").count().show(10)\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-27 20:48:31.399",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+-----+\n|   device_identifier|count|\n+--------------------+-----+\n|a9db6f3a-2c33-11e...|  437|\n|56fdb211-2c35-11e...|  531|\n|d9344a18-2c35-11e...|  336|\n|2cf2c5ee-2c34-11e...|  536|\n|3100fd86-2c34-11e...|  499|\n|d9a3e694-2c35-11e...|  375|\n|23daa41d-2c34-11e...|  515|\n|3a4a89ea-2c36-11e...|  347|\n|f4088505-2c33-11e...|  535|\n|d92b3eb8-2c33-11e...| 1138|\n+--------------------+-----+\nonly showing top 10 rows\n\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d4",
+            "http://172.17.0.2:4040/jobs/job?id\u003d5"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1564249583354_1539542067",
+      "id": "20190727-174623_1058262625",
+      "dateCreated": "2019-07-27 17:46:23.355",
+      "dateStarted": "2019-07-27 20:48:31.543",
+      "dateFinished": "2019-07-27 20:48:34.604",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark.sql\nSELECT * FROM ingestion_view LIMIT 10",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-27 20:48:34.675",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "measurement_datetime": "string",
+                      "device_identifier": "string",
+                      "bytes_total": "string",
+                      "bytes_per_second": "string",
+                      "successes": "string",
+                      "failures": "string",
+                      "fetch_time": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "measurement_datetime\tdevice_identifier\tbytes_total\tbytes_per_second\tsuccesses\tfailures\tfetch_time\n2019-01-05 04:57:21.0\t45ce9eb2-2c36-11e7-b97c-0cc47a6bebee\t369170496\t3.6916699E7\t1\t0\t10000095\n2019-01-05 23:34:36.0\t7b8c5fb3-9f33-11e8-ae05-002590e569f4\t117293792\t1.1717693E7\t1\t0\t10009973\n2019-01-05 21:15:39.0\t0bebf443-9cd8-11e8-ae05-002590e569f4\t372999544\t3.726338E7\t1\t0\t10009815\n2019-01-05 20:02:33.0\t45ce9eb2-2c36-11e7-b97c-0cc47a6bebee\t281369568\t2.8136712E7\t1\t0\t10000087\n2019-01-05 06:26:41.0\t485ad193-2c35-11e7-b97c-0cc47a6bebee\t371844952\t3.7181822E7\t1\t0\t10000719\n2019-01-05 10:57:30.0\t45ce9eb2-2c36-11e7-b97c-0cc47a6bebee\t361668408\t3.6155954E7\t1\t0\t10003011\n2019-01-05 22:30:47.0\t485ad193-2c35-11e7-b97c-0cc47a6bebee\t365926976\t3.6592006E7\t1\t0\t10000189\n2019-01-05 19:16:57.0\t0bebf443-9cd8-11e8-ae05-002590e569f4\t372996760\t3.7262224E7\t1\t0\t10010051\n2019-01-05 06:34:27.0\t84240f69-b6c6-11e8-ae05-002590e569f4\t588249672\t5.8769213E7\t1\t0\t10009487\n2019-01-05 14:59:14.0\t6a33a635-b4da-11e8-ae05-002590e569f4\t582565168\t5.8198278E7\t1\t0\t10010007\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d6"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1564248998951_1132287117",
+      "id": "20190727-173638_865219087",
+      "dateCreated": "2019-07-27 17:36:38.951",
+      "dateStarted": "2019-07-27 20:48:34.738",
+      "dateFinished": "2019-07-27 20:48:35.147",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark.sql\nSELECT device_identifier, sum(successes), sum(failures), round(sum(successes)/(sum(successes) + sum(failures))*100.0, 2) as ratio FROM ingestion_view group By device_identifier",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-27 20:48:35.241",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "device_identifier": "string",
+                      "sum(successes)": "string",
+                      "sum(failures)": "string",
+                      "ratio": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "device_identifier",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "sum(successes)",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "device_identifier\tsum(successes)\tsum(failures)\tratio\na9db6f3a-2c33-11e7-b97c-0cc47a6bebee\t420\t17\t96.11\n56fdb211-2c35-11e7-b97c-0cc47a6bebee\t513\t18\t96.61\nd9344a18-2c35-11e7-b97c-0cc47a6bebee\t324\t12\t96.43\n2cf2c5ee-2c34-11e7-b97c-0cc47a6bebee\t516\t20\t96.27\n3100fd86-2c34-11e7-b97c-0cc47a6bebee\t481\t18\t96.39\nd9a3e694-2c35-11e7-b97c-0cc47a6bebee\t375\t0\t100.0\n23daa41d-2c34-11e7-b97c-0cc47a6bebee\t497\t18\t96.5\n3a4a89ea-2c36-11e7-b97c-0cc47a6bebee\t335\t12\t96.54\nf4088505-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.64\nd92b3eb8-2c33-11e7-b97c-0cc47a6bebee\t1100\t38\t96.66\nc6f2c932-2c33-11e7-b97c-0cc47a6bebee\t420\t12\t97.22\nb2481530-2c33-11e7-b97c-0cc47a6bebee\t523\t19\t96.49\ne2d5a01b-2c35-11e7-b97c-0cc47a6bebee\t179\t7\t96.24\n0b7835c4-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n8bd0f21b-2c33-11e7-b97c-0cc47a6bebee\t438\t20\t95.63\nb291cf28-2c33-11e7-b97c-0cc47a6bebee\t336\t11\t96.83\n2d0720c8-2c34-11e7-b97c-0cc47a6bebee\t325\t0\t100.0\n715b5a02-0dcb-11e8-8388-ac1f6b055fa6\t523\t18\t96.67\naa1d942a-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\n987fb7a9-2c33-11e7-b97c-0cc47a6bebee\t20\t2\t90.91\ne5bce14c-2c35-11e7-b97c-0cc47a6bebee\t1092\t46\t95.96\na952aa01-2c33-11e7-b97c-0cc47a6bebee\t441\t0\t100.0\n8522d566-2c36-11e7-b97c-0cc47a6bebee\t478\t17\t96.57\nf29f1076-2c33-11e7-b97c-0cc47a6bebee\t436\t0\t100.0\n4873bd3f-2c34-11e7-b97c-0cc47a6bebee\t1074\t44\t96.06\na34797a9-2c33-11e7-b97c-0cc47a6bebee\t483\t20\t96.02\na72a0527-2c33-11e7-b97c-0cc47a6bebee\t500\t37\t93.11\na7e74d12-2c33-11e7-b97c-0cc47a6bebee\t510\t18\t96.59\n69fa4c2f-2c33-11e7-b97c-0cc47a6bebee\t348\t16\t95.6\nde751426-2c33-11e7-b97c-0cc47a6bebee\t852\t37\t95.84\n3ade6445-2c36-11e7-b97c-0cc47a6bebee\t175\t9\t95.11\na91645c3-2c33-11e7-b97c-0cc47a6bebee\t486\t11\t97.79\n3cfe5970-2c36-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n47d0947a-2c36-11e7-b97c-0cc47a6bebee\t382\t23\t94.32\n223410e0-2c34-11e7-b97c-0cc47a6bebee\t483\t17\t96.6\na59a97b0-2c33-11e7-b97c-0cc47a6bebee\t359\t13\t96.51\n0a75003f-9cd8-11e8-ae05-002590e569f4\t935\t28\t97.09\n47cceef3-2c36-11e7-b97c-0cc47a6bebee\t302\t10\t96.79\n3130dd3e-2c34-11e7-b97c-0cc47a6bebee\t350\t14\t96.15\n3e0bf8e9-2c35-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n487eaf1b-2c34-11e7-b97c-0cc47a6bebee\t678\t14\t97.98\n39e24926-2c36-11e7-b97c-0cc47a6bebee\t348\t5\t98.58\nf3fe07df-2c33-11e7-b97c-0cc47a6bebee\t528\t18\t96.7\na6ac6a1d-2c33-11e7-b97c-0cc47a6bebee\t500\t18\t96.53\n37e960ff-2c36-11e7-b97c-0cc47a6bebee\t327\t12\t96.46\n6c4f1605-b4da-11e8-ae05-002590e569f4\t1094\t40\t96.47\nc96ffac6-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\n8536fd60-2c36-11e7-b97c-0cc47a6bebee\t509\t16\t96.95\n561c2509-bb34-11e7-b2b3-ac1f6b055fa6\t3\t0\t100.0\n29db6da7-2c34-11e7-b97c-0cc47a6bebee\t489\t14\t97.22\nb28be17b-2c33-11e7-b97c-0cc47a6bebee\t521\t21\t96.13\na6ec2dd9-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\na30ca9db-2c33-11e7-b97c-0cc47a6bebee\t503\t18\t96.55\na009ff26-8da0-11e7-9e41-0cc47adc2912\t1100\t38\t96.66\n481a9dcb-2c36-11e7-b97c-0cc47a6bebee\t195\t8\t96.06\nd99d9321-2c35-11e7-b97c-0cc47a6bebee\t193\t8\t96.02\n4390b1f4-2c36-11e7-b97c-0cc47a6bebee\t344\t12\t96.63\na50f3d36-2c33-11e7-b97c-0cc47a6bebee\t183\t3\t98.39\na3f70ae7-2c33-11e7-b97c-0cc47a6bebee\t425\t18\t95.94\n3ad1d5d5-2c36-11e7-b97c-0cc47a6bebee\t341\t12\t96.6\na8e53cb1-2c33-11e7-b97c-0cc47a6bebee\t448\t18\t96.14\n8ea55bf4-8da0-11e7-9e41-0cc47adc2912\t902\t34\t96.37\nd8e57183-2c33-11e7-b97c-0cc47a6bebee\t508\t18\t96.58\n375aa4b9-2c36-11e7-b97c-0cc47a6bebee\t332\t12\t96.51\naa95c3ce-2c33-11e7-b97c-0cc47a6bebee\t231\t7\t97.06\n3b138dc2-2c35-11e7-b97c-0cc47a6bebee\t977\t42\t95.88\n3e1a5eb1-2c34-11e7-b97c-0cc47a6bebee\t459\t16\t96.63\na6e9f6a2-2c33-11e7-b97c-0cc47a6bebee\t413\t17\t96.05\n440d3607-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7\n29e0c433-2c34-11e7-b97c-0cc47a6bebee\t183\t9\t95.31\nc7cf4130-2c33-11e7-b97c-0cc47a6bebee\t486\t13\t97.39\n23d8c0c8-2c34-11e7-b97c-0cc47a6bebee\t493\t18\t96.48\n39d03be9-2c33-11e7-b97c-0cc47a6bebee\t510\t24\t95.51\n99c0e766-2c33-11e7-b97c-0cc47a6bebee\t464\t0\t100.0\n3cc9bb36-2c36-11e7-b97c-0cc47a6bebee\t319\t10\t96.96\nb2760a7f-2c33-11e7-b97c-0cc47a6bebee\t414\t16\t96.28\n439b99d6-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7\na30564e6-2c33-11e7-b97c-0cc47a6bebee\t452\t15\t96.79\nb4f10cf2-2c33-11e7-b97c-0cc47a6bebee\t525\t18\t96.69\n41f3914d-a3a1-11e7-9e41-0cc47adc2912\t0\t236\t0.0\ne0e54276-2c35-11e7-b97c-0cc47a6bebee\t179\t8\t95.72\nb47cc443-2c33-11e7-b97c-0cc47a6bebee\t413\t13\t96.95\n484c82b4-2c34-11e7-b97c-0cc47a6bebee\t522\t24\t95.6\nb5c9c1d4-2c33-11e7-b97c-0cc47a6bebee\t431\t8\t98.18\nbe962e6b-4230-11e7-b154-0cc47a6bebee\t476\t18\t96.36\n58283ec8-2c33-11e7-b97c-0cc47a6bebee\t506\t17\t96.75\n99e7f338-2c33-11e7-b97c-0cc47a6bebee\t497\t16\t96.88\n3127c673-2c34-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\na5679d55-2c33-11e7-b97c-0cc47a6bebee\t233\t9\t96.28\na80092b9-2c33-11e7-b97c-0cc47a6bebee\t489\t18\t96.45\nfd0528fa-a18e-11e8-ae05-002590e569f4\t1108\t38\t96.68\na9b80501-2c33-11e7-b97c-0cc47a6bebee\t523\t18\t96.67\n388af32c-2c36-11e7-b97c-0cc47a6bebee\t316\t12\t96.34\na9d60b5a-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\n479e9a79-2c36-11e7-b97c-0cc47a6bebee\t159\t0\t100.0\n69e47939-2c33-11e7-b97c-0cc47a6bebee\t466\t11\t97.69\n0ac0131b-9cd8-11e8-ae05-002590e569f4\t890\t26\t97.16\na58f474d-2c33-11e7-b97c-0cc47a6bebee\t453\t16\t96.59\na3aa59a9-2c33-11e7-b97c-0cc47a6bebee\t521\t21\t96.13\n3dec8d8c-2c35-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\nb2a0f806-2c33-11e7-b97c-0cc47a6bebee\t500\t18\t96.53\n6e046d76-b4da-11e8-ae05-002590e569f4\t1058\t48\t95.66\n2cee094d-2c34-11e7-b97c-0cc47a6bebee\t507\t18\t96.57\na58e6ed5-2c33-11e7-b97c-0cc47a6bebee\t513\t18\t96.61\n6cc20611-b4da-11e8-ae05-002590e569f4\t1063\t38\t96.55\nc0b7695c-2c35-11e7-b97c-0cc47a6bebee\t177\t0\t100.0\nc6f82d76-2c33-11e7-b97c-0cc47a6bebee\t231\t8\t96.65\n97983ff7-c87a-11e7-b2b3-ac1f6b055fa6\t180\t18\t90.91\na2f71852-2c33-11e7-b97c-0cc47a6bebee\t485\t15\t97.0\n0b6e8a8e-2c34-11e7-b97c-0cc47a6bebee\t476\t18\t96.36\ne52a7a57-2c35-11e7-b97c-0cc47a6bebee\t981\t38\t96.27\n44b346b6-2c36-11e7-b97c-0cc47a6bebee\t338\t18\t94.94\n0b5b1978-2c34-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\n8c1e5fa7-2c33-11e7-b97c-0cc47a6bebee\t505\t18\t96.56\n45c481f5-2c36-11e7-b97c-0cc47a6bebee\t489\t18\t96.45\na92090b6-2c33-11e7-b97c-0cc47a6bebee\t486\t16\t96.81\n3767ec66-2c36-11e7-b97c-0cc47a6bebee\t310\t12\t96.27\nb4f60cd8-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\na641f9dc-2c33-11e7-b97c-0cc47a6bebee\t392\t0\t100.0\na9a15c2d-2c33-11e7-b97c-0cc47a6bebee\t467\t18\t96.29\n3ac5fff7-2c35-11e7-b97c-0cc47a6bebee\t1082\t44\t96.09\n60abb56d-b4da-11e8-ae05-002590e569f4\t1060\t38\t96.54\n69623f41-b4da-11e8-ae05-002590e569f4\t1082\t44\t96.09\nf695e646-2c33-11e7-b97c-0cc47a6bebee\t495\t18\t96.49\na9ec612b-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\nf4067b73-2c33-11e7-b97c-0cc47a6bebee\t515\t18\t96.62\n98ec6b7f-2c33-11e7-b97c-0cc47a6bebee\t495\t18\t96.49\n0b9393f7-2c34-11e7-b97c-0cc47a6bebee\t499\t17\t96.71\naabeb84c-2c33-11e7-b97c-0cc47a6bebee\t64\t3\t95.52\n3945c401-2c34-11e7-b97c-0cc47a6bebee\t70\t0\t100.0\n38bf6b05-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7\n988493e5-2c33-11e7-b97c-0cc47a6bebee\t521\t18\t96.66\n5332bb9f-2c35-11e7-b97c-0cc47a6bebee\t506\t17\t96.75\n0bebf443-9cd8-11e8-ae05-002590e569f4\t999\t47\t95.51\n9cb4bc69-2c33-11e7-b97c-0cc47a6bebee\t516\t18\t96.63\na40ea121-2c33-11e7-b97c-0cc47a6bebee\t504\t18\t96.55\n2d624dbc-2c34-11e7-b97c-0cc47a6bebee\t292\t23\t92.7\na8b6efab-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\n682934f9-b4da-11e8-ae05-002590e569f4\t652\t40\t94.22\n45ce9eb2-2c36-11e7-b97c-0cc47a6bebee\t854\t28\t96.83\n3e03aa75-2c35-11e7-b97c-0cc47a6bebee\t498\t18\t96.51\na3baabab-2c33-11e7-b97c-0cc47a6bebee\t502\t18\t96.54\n81252054-c87a-11e7-b2b3-ac1f6b055fa6\t521\t18\t96.66\nf3b15e0c-2c33-11e7-b97c-0cc47a6bebee\t472\t16\t96.72\n2950102f-2c34-11e7-b97c-0cc47a6bebee\t273\t8\t97.15\na39b98c4-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.64\n4869498e-2c34-11e7-b97c-0cc47a6bebee\t1080\t38\t96.6\n47ced34a-0d02-11e8-8388-ac1f6b055fa6\t1066\t50\t95.52\nf2609f4f-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\nd35ab445-2c33-11e7-b97c-0cc47a6bebee\t505\t17\t96.74\nb45df5cc-2c33-11e7-b97c-0cc47a6bebee\t381\t17\t95.73\n9a861b31-2c33-11e7-b97c-0cc47a6bebee\t473\t17\t96.53\n44b02431-2c36-11e7-b97c-0cc47a6bebee\t346\t16\t95.58\n467bac28-2c36-11e7-b97c-0cc47a6bebee\t309\t6\t98.1\na5bc75d7-2c33-11e7-b97c-0cc47a6bebee\t344\t0\t100.0\n23d27706-2c34-11e7-b97c-0cc47a6bebee\t396\t18\t95.65\na67ae91c-2c33-11e7-b97c-0cc47a6bebee\t425\t0\t100.0\n64c31c0e-b4da-11e8-ae05-002590e569f4\t1118\t38\t96.71\na5ac5610-2c33-11e7-b97c-0cc47a6bebee\t490\t18\t96.46\nd8aa11a5-2c35-11e7-b97c-0cc47a6bebee\t176\t8\t95.65\n707fd9b4-2c35-11e7-b97c-0cc47a6bebee\t213\t11\t95.09\n38b1321b-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7\ne1698c7a-2c35-11e7-b97c-0cc47a6bebee\t143\t5\t96.62\n0b25f80d-2c34-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\n0444d68d-2c34-11e7-b97c-0cc47a6bebee\t14\t0\t100.0\ne16c14b5-2c35-11e7-b97c-0cc47a6bebee\t161\t42\t79.31\n0b5a595c-2c34-11e7-b97c-0cc47a6bebee\t394\t14\t96.57\n27fa06d7-2c34-11e7-b97c-0cc47a6bebee\t466\t16\t96.68\nd8af8468-2c35-11e7-b97c-0cc47a6bebee\t179\t8\t95.72\n9492ce77-2c35-11e7-b97c-0cc47a6bebee\t855\t29\t96.72\n6d45bc87-4ad5-11e7-a936-0cc47a6bebee\t518\t24\t95.57\na313e7de-2c33-11e7-b97c-0cc47a6bebee\t516\t18\t96.63\n992b41fb-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\ne5271a2a-2c35-11e7-b97c-0cc47a6bebee\t743\t26\t96.62\n31264c0a-2c34-11e7-b97c-0cc47a6bebee\t461\t10\t97.88\n2cef9134-2c34-11e7-b97c-0cc47a6bebee\t341\t12\t96.6\n9325a100-8da0-11e7-9e41-0cc47adc2912\t771\t42\t94.83\n47f46831-2c36-11e7-b97c-0cc47a6bebee\t187\t8\t95.9\n0925a22d-9cd8-11e8-ae05-002590e569f4\t1077\t31\t97.2\n06db647f-2c35-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\ncb20a04b-bb34-11e7-b2b3-ac1f6b055fa6\t355\t3\t99.16\n47f836d3-2c36-11e7-b97c-0cc47a6bebee\t185\t8\t95.85\na3230ad7-2c33-11e7-b97c-0cc47a6bebee\t514\t18\t96.62\na8d39b4d-2c33-11e7-b97c-0cc47a6bebee\t476\t18\t96.36\n21b9786b-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n45eb4ac9-2c36-11e7-b97c-0cc47a6bebee\t74\t3\t96.1\na92d0696-2c33-11e7-b97c-0cc47a6bebee\t356\t10\t97.27\nf29d736c-2c33-11e7-b97c-0cc47a6bebee\t294\t15\t95.15\n2d7369be-2c34-11e7-b97c-0cc47a6bebee\t953\t15\t98.45\naa118132-2c33-11e7-b97c-0cc47a6bebee\t487\t16\t96.82\n6529412f-b4da-11e8-ae05-002590e569f4\t1043\t38\t96.48\n2ed52696-2c34-11e7-b97c-0cc47a6bebee\t916\t32\t96.62\n8552c19f-2c33-11e7-b97c-0cc47a6bebee\t515\t18\t96.62\ne67f5cce-2c33-11e7-b97c-0cc47a6bebee\t521\t18\t96.66\n2af8ba70-2c34-11e7-b97c-0cc47a6bebee\t408\t12\t97.14\n2d0087a3-2c34-11e7-b97c-0cc47a6bebee\t501\t16\t96.91\nd356dafd-2c33-11e7-b97c-0cc47a6bebee\t465\t16\t96.67\n961e3da1-2c33-11e7-b97c-0cc47a6bebee\t509\t21\t96.04\nc7904461-2c33-11e7-b97c-0cc47a6bebee\t320\t12\t96.39\na5a1fa17-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\naadf6314-2c33-11e7-b97c-0cc47a6bebee\t132\t10\t92.96\na68f1800-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n54c5e6ed-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n0c81da3f-9cd8-11e8-ae05-002590e569f4\t879\t32\t96.49\n25b94726-2c34-11e7-b97c-0cc47a6bebee\t506\t16\t96.93\n0b46ee98-2c34-11e7-b97c-0cc47a6bebee\t517\t16\t97.0\na8cbd108-2c33-11e7-b97c-0cc47a6bebee\t407\t14\t96.67\n485ad193-2c35-11e7-b97c-0cc47a6bebee\t916\t34\t96.42\na86ce25d-2c33-11e7-b97c-0cc47a6bebee\t522\t20\t96.31\nb7cb7739-2c33-11e7-b97c-0cc47a6bebee\t335\t11\t96.82\nfb0bd4e4-a18e-11e8-ae05-002590e569f4\t1088\t42\t96.28\n4843e60f-2c34-11e7-b97c-0cc47a6bebee\t246\t7\t97.23\neabcc61d-2c33-11e7-b97c-0cc47a6bebee\t498\t18\t96.51\n9aeba87d-2c33-11e7-b97c-0cc47a6bebee\t482\t20\t96.02\na5b83b22-2c33-11e7-b97c-0cc47a6bebee\t490\t18\t96.46\n98e193d1-2c33-11e7-b97c-0cc47a6bebee\t431\t19\t95.78\na6b9409b-2c33-11e7-b97c-0cc47a6bebee\t341\t11\t96.88\n47f8f910-2c36-11e7-b97c-0cc47a6bebee\t170\t7\t96.05\n3e1beef6-2c34-11e7-b97c-0cc47a6bebee\t170\t0\t100.0\nb4f7284b-2c33-11e7-b97c-0cc47a6bebee\t518\t22\t95.93\na8af4cc5-2c33-11e7-b97c-0cc47a6bebee\t507\t18\t96.57\n4393ead6-2c36-11e7-b97c-0cc47a6bebee\t318\t12\t96.36\nc88f7c21-2c33-11e7-b97c-0cc47a6bebee\t496\t15\t97.06\na7912ab3-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\n9a708f0e-2c33-11e7-b97c-0cc47a6bebee\t512\t18\t96.6\na65e4117-2c33-11e7-b97c-0cc47a6bebee\t498\t20\t96.14\nd0c1908a-2c33-11e7-b97c-0cc47a6bebee\t375\t9\t97.66\na3492134-2c33-11e7-b97c-0cc47a6bebee\t512\t18\t96.6\n3057ef02-a3a1-11e7-9e41-0cc47adc2912\t1108\t38\t96.68\n07104374-9cd8-11e8-ae05-002590e569f4\t723\t45\t94.14\n996b81c8-8da0-11e7-9e41-0cc47adc2912\t1098\t38\t96.65\na8a6e13b-2c33-11e7-b97c-0cc47a6bebee\t502\t18\t96.54\n4825c67e-2c36-11e7-b97c-0cc47a6bebee\t233\t0\t100.0\na303d3ea-2c33-11e7-b97c-0cc47a6bebee\t344\t10\t97.18\na3eebb39-2c33-11e7-b97c-0cc47a6bebee\t516\t18\t96.63\nc6d56f52-2c33-11e7-b97c-0cc47a6bebee\t392\t12\t97.03\na466e6d3-2c33-11e7-b97c-0cc47a6bebee\t498\t17\t96.7\nd8a3ce9d-2c35-11e7-b97c-0cc47a6bebee\t155\t8\t95.09\n98e858ef-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\n3da1634e-2c35-11e7-b97c-0cc47a6bebee\t977\t32\t96.83\n481cfb1e-2c36-11e7-b97c-0cc47a6bebee\t199\t8\t96.14\n4a07c5dc-bb34-11e7-b2b3-ac1f6b055fa6\t483\t18\t96.41\na42cfbe3-2c33-11e7-b97c-0cc47a6bebee\t521\t17\t96.84\nfcad55b5-2c33-11e7-b97c-0cc47a6bebee\t472\t21\t95.74\n94b458ab-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.64\na9b2af00-2c33-11e7-b97c-0cc47a6bebee\t502\t16\t96.91\ne0e6abd5-2c35-11e7-b97c-0cc47a6bebee\t146\t7\t95.42\ncf827db7-2c33-11e7-b97c-0cc47a6bebee\t233\t17\t93.2\n0b4adc59-2c34-11e7-b97c-0cc47a6bebee\t526\t18\t96.69\n3c8948e5-2c36-11e7-b97c-0cc47a6bebee\t517\t17\t96.82\naa4176ff-2c33-11e7-b97c-0cc47a6bebee\t509\t17\t96.77\na8b2da43-2c33-11e7-b97c-0cc47a6bebee\t526\t18\t96.69\ne70613c3-2c33-11e7-b97c-0cc47a6bebee\t503\t20\t96.18\naa86bed5-2c33-11e7-b97c-0cc47a6bebee\t388\t13\t96.76\ne17f04c1-2c35-11e7-b97c-0cc47a6bebee\t108\t2\t98.18\n3cbca463-2c36-11e7-b97c-0cc47a6bebee\t344\t12\t96.63\na3ef7f3d-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\nc6fbc250-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n831651b0-9f33-11e8-ae05-002590e569f4\t1095\t37\t96.73\n38932009-2c36-11e7-b97c-0cc47a6bebee\t348\t12\t96.67\nfa95cec1-2c33-11e7-b97c-0cc47a6bebee\t521\t18\t96.66\n3e217f3f-2c35-11e7-b97c-0cc47a6bebee\t503\t20\t96.18\na3f1d3b4-2c33-11e7-b97c-0cc47a6bebee\t480\t20\t96.0\nd8e7fc8a-2c33-11e7-b97c-0cc47a6bebee\t141\t3\t97.92\na791f216-2c33-11e7-b97c-0cc47a6bebee\t243\t12\t95.29\na706218c-2c33-11e7-b97c-0cc47a6bebee\t515\t17\t96.8\ne1008e51-2c35-11e7-b97c-0cc47a6bebee\t173\t8\t95.58\n8aebf691-c87a-11e7-b2b3-ac1f6b055fa6\t360\t7\t98.09\nea932e58-2c33-11e7-b97c-0cc47a6bebee\t514\t18\t96.62\n3abc96da-2c35-11e7-b97c-0cc47a6bebee\t1090\t44\t96.12\n47bb5181-2c36-11e7-b97c-0cc47a6bebee\t516\t18\t96.63\n481b739d-2c36-11e7-b97c-0cc47a6bebee\t161\t6\t96.41\na5927152-2c33-11e7-b97c-0cc47a6bebee\t505\t17\t96.74\n656edc9e-bb34-11e7-b2b3-ac1f6b055fa6\t472\t11\t97.72\n2e648aad-2c34-11e7-b97c-0cc47a6bebee\t452\t18\t96.17\na9937167-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n84734f13-b6c6-11e8-ae05-002590e569f4\t1100\t38\t96.66\n43995345-2c36-11e7-b97c-0cc47a6bebee\t324\t12\t96.43\n0b4d38b9-2c34-11e7-b97c-0cc47a6bebee\t524\t22\t95.97\n5a18bde1-2c35-11e7-b97c-0cc47a6bebee\t516\t22\t95.91\n6aa3f285-b4da-11e8-ae05-002590e569f4\t1088\t38\t96.63\n23e667dd-2c34-11e7-b97c-0cc47a6bebee\t505\t17\t96.74\n9d1da93b-bc46-11e8-ae05-002590e569f4\t1070\t38\t96.57\n37cbae4a-2c36-11e7-b97c-0cc47a6bebee\t320\t12\t96.39\nda3c25a4-2c35-11e7-b97c-0cc47a6bebee\t199\t8\t96.14\n9c20024e-8da0-11e7-9e41-0cc47adc2912\t1056\t72\t93.62\n3c7485b4-2c34-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\na52a4d5a-2c33-11e7-b97c-0cc47a6bebee\t506\t20\t96.2\n9a7872c0-2c33-11e7-b97c-0cc47a6bebee\t500\t18\t96.53\n584c945d-2c33-11e7-b97c-0cc47a6bebee\t501\t17\t96.72\n3eeb1191-2c34-11e7-b97c-0cc47a6bebee\t41\t0\t100.0\ne17a4b3d-2c35-11e7-b97c-0cc47a6bebee\t198\t8\t96.12\nea8619f0-2c33-11e7-b97c-0cc47a6bebee\t178\t5\t97.27\na3b070b0-2c33-11e7-b97c-0cc47a6bebee\t516\t18\t96.63\na388534d-2c33-11e7-b97c-0cc47a6bebee\t534\t21\t96.22\na55ad6d5-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\n948ae72b-2c33-11e7-b97c-0cc47a6bebee\t503\t18\t96.55\n4863e841-2c34-11e7-b97c-0cc47a6bebee\t1055\t34\t96.88\nfbdff6c5-2c33-11e7-b97c-0cc47a6bebee\t13\t1\t92.86\n3d19de2b-2c36-11e7-b97c-0cc47a6bebee\t184\t8\t95.83\ne9548a0b-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\n82758d22-9f33-11e8-ae05-002590e569f4\t934\t41\t95.79\n26383f6b-2c34-11e7-b97c-0cc47a6bebee\t206\t2\t99.04\nd89fe3c2-2c35-11e7-b97c-0cc47a6bebee\t105\t7\t93.75\n94d8f559-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\ne1642025-2c35-11e7-b97c-0cc47a6bebee\t189\t8\t95.94\n44f1630c-2c36-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\n98f4d763-2c33-11e7-b97c-0cc47a6bebee\t506\t18\t96.56\n2220cdac-2c34-11e7-b97c-0cc47a6bebee\t493\t18\t96.48\na643621b-2c33-11e7-b97c-0cc47a6bebee\t526\t18\t96.69\n3e28a984-2c35-11e7-b97c-0cc47a6bebee\t465\t20\t95.88\n99cc2d82-2c33-11e7-b97c-0cc47a6bebee\t462\t16\t96.65\n9e399765-2c33-11e7-b97c-0cc47a6bebee\t493\t15\t97.05\n21c2c258-2c34-11e7-b97c-0cc47a6bebee\t379\t18\t95.47\n37909381-2c36-11e7-b97c-0cc47a6bebee\t328\t12\t96.47\na5375f09-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\n29e18e27-2c34-11e7-b97c-0cc47a6bebee\t491\t18\t96.46\n992f1819-2c33-11e7-b97c-0cc47a6bebee\t514\t17\t96.8\n73a30682-2c36-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\nf796258f-2c33-11e7-b97c-0cc47a6bebee\t506\t8\t98.44\n47a4fb64-2c36-11e7-b97c-0cc47a6bebee\t324\t12\t96.43\na9002661-2c33-11e7-b97c-0cc47a6bebee\t368\t0\t100.0\na95ad0f7-2c33-11e7-b97c-0cc47a6bebee\t514\t18\t96.62\na7f0b42b-2c33-11e7-b97c-0cc47a6bebee\t481\t18\t96.39\na95157d0-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\nd3698009-2c33-11e7-b97c-0cc47a6bebee\t373\t18\t95.4\n3e0e9c76-2c35-11e7-b97c-0cc47a6bebee\t462\t18\t96.25\na6354f06-2c33-11e7-b97c-0cc47a6bebee\t500\t33\t93.81\n969b143e-2c33-11e7-b97c-0cc47a6bebee\t511\t18\t96.6\na439c567-2c33-11e7-b97c-0cc47a6bebee\t390\t11\t97.26\n6b7a68f0-b4da-11e8-ae05-002590e569f4\t1025\t38\t96.43\n393659ee-2c35-11e7-b97c-0cc47a6bebee\t1108\t38\t96.68\n2ceec93b-2c34-11e7-b97c-0cc47a6bebee\t491\t15\t97.04\n2d225dce-2c34-11e7-b97c-0cc47a6bebee\t517\t20\t96.28\n63f5433e-b4da-11e8-ae05-002590e569f4\t1090\t66\t94.29\n362fb66d-a3a1-11e7-9e41-0cc47adc2912\t1090\t36\t96.8\nb461cd9e-2c33-11e7-b97c-0cc47a6bebee\t506\t18\t96.56\n3b0dbb18-2c35-11e7-b97c-0cc47a6bebee\t1100\t38\t96.66\nc6d2df68-2c33-11e7-b97c-0cc47a6bebee\t307\t18\t94.46\n84240f69-b6c6-11e8-ae05-002590e569f4\t1100\t38\t96.66\ndfb21750-a0c5-11e8-ae05-002590e569f4\t1110\t44\t96.19\n94da1386-9f33-11e8-ae05-002590e569f4\t1088\t38\t96.63\na8813221-2c33-11e7-b97c-0cc47a6bebee\t514\t18\t96.62\n98e25a5e-2c33-11e7-b97c-0cc47a6bebee\t496\t18\t96.5\n3a9f0629-2c35-11e7-b97c-0cc47a6bebee\t1065\t40\t96.38\n1a8175f8-c87d-11e7-b2b3-ac1f6b055fa6\t526\t21\t96.16\n0b751f6e-2c34-11e7-b97c-0cc47a6bebee\t521\t18\t96.66\ne10b6653-2c35-11e7-b97c-0cc47a6bebee\t189\t8\t95.94\n58b51998-2c33-11e7-b97c-0cc47a6bebee\t518\t22\t95.93\n48277cc0-2c36-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\n2d04d2ec-2c34-11e7-b97c-0cc47a6bebee\t506\t18\t96.56\n279f69c2-2c34-11e7-b97c-0cc47a6bebee\t512\t18\t96.6\n2228a24c-2c34-11e7-b97c-0cc47a6bebee\t234\t0\t100.0\n389c8681-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7\n99d7a73a-2c33-11e7-b97c-0cc47a6bebee\t523\t18\t96.67\na3da139f-2c33-11e7-b97c-0cc47a6bebee\t292\t6\t97.99\na4c3747e-2c33-11e7-b97c-0cc47a6bebee\t442\t14\t96.93\n8ab22b2e-9f33-11e8-ae05-002590e569f4\t1053\t81\t92.86\n29e00491-2c34-11e7-b97c-0cc47a6bebee\t501\t18\t96.53\nd9ab5d2c-2c35-11e7-b97c-0cc47a6bebee\t423\t18\t95.92\na9fb27cc-2c33-11e7-b97c-0cc47a6bebee\t508\t18\t96.58\n971469b0-2c33-11e7-b97c-0cc47a6bebee\t273\t13\t95.45\n4644aa15-2c36-11e7-b97c-0cc47a6bebee\t203\t8\t96.21\n05aa058e-2c34-11e7-b97c-0cc47a6bebee\t1092\t38\t96.64\ne5245efe-2c35-11e7-b97c-0cc47a6bebee\t1041\t41\t96.21\ne0e3795b-2c35-11e7-b97c-0cc47a6bebee\t123\t5\t96.09\na7146f9e-2c33-11e7-b97c-0cc47a6bebee\t512\t21\t96.06\na9994d5e-2c33-11e7-b97c-0cc47a6bebee\t509\t17\t96.77\n0b21bf65-2c34-11e7-b97c-0cc47a6bebee\t488\t18\t96.44\n3cbaef5b-2c36-11e7-b97c-0cc47a6bebee\t467\t18\t96.29\n21bcc2bd-2c34-11e7-b97c-0cc47a6bebee\t514\t18\t96.62\n37e4c912-2c36-11e7-b97c-0cc47a6bebee\t326\t12\t96.45\n99d04d18-2c35-11e7-b97c-0cc47a6bebee\t348\t20\t94.57\nfb8993dd-2c33-11e7-b97c-0cc47a6bebee\t460\t18\t96.23\ndffb1ddd-a0c5-11e8-ae05-002590e569f4\t1122\t38\t96.72\nd90904b9-2c35-11e7-b97c-0cc47a6bebee\t426\t18\t95.95\na12d4d18-8da0-11e7-9e41-0cc47adc2912\t855\t32\t96.39\neac3fa77-2c33-11e7-b97c-0cc47a6bebee\t291\t25\t92.09\n0ccd4bd3-9cd8-11e8-ae05-002590e569f4\t1094\t48\t95.8\n462a8a33-2c36-11e7-b97c-0cc47a6bebee\t825\t0\t100.0\na3bb75f4-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\n99236d8a-2c33-11e7-b97c-0cc47a6bebee\t518\t20\t96.28\n81a7ea53-9f33-11e8-ae05-002590e569f4\t1090\t38\t96.63\n638e9aa5-b4da-11e8-ae05-002590e569f4\t968\t32\t96.8\na7a739af-2c33-11e7-b97c-0cc47a6bebee\t344\t12\t96.63\n5787f3aa-2c35-11e7-b97c-0cc47a6bebee\t509\t17\t96.77\n9a696f03-2c33-11e7-b97c-0cc47a6bebee\t431\t14\t96.85\nfe61213d-2c33-11e7-b97c-0cc47a6bebee\t517\t17\t96.82\n27a02ad0-2c34-11e7-b97c-0cc47a6bebee\t438\t18\t96.05\nb276e8b5-2c33-11e7-b97c-0cc47a6bebee\t478\t18\t96.37\naaecec61-2c33-11e7-b97c-0cc47a6bebee\t528\t18\t96.7\n6e72837f-b4da-11e8-ae05-002590e569f4\t985\t38\t96.29\na6770816-2c33-11e7-b97c-0cc47a6bebee\t60\t5\t92.31\na41f41f1-2c33-11e7-b97c-0cc47a6bebee\t498\t17\t96.7\n7e34cb33-9f33-11e8-ae05-002590e569f4\t928\t32\t96.67\n2d01eeab-2c34-11e7-b97c-0cc47a6bebee\t471\t29\t94.2\n0fb15764-9cd8-11e8-ae05-002590e569f4\t1063\t48\t95.68\ne1091e29-2c35-11e7-b97c-0cc47a6bebee\t188\t6\t96.91\na6bfdcab-2c33-11e7-b97c-0cc47a6bebee\t518\t17\t96.82\nd337be84-2c33-11e7-b97c-0cc47a6bebee\t441\t12\t97.35\n39373305-2c35-11e7-b97c-0cc47a6bebee\t1084\t38\t96.61\n3af0b91f-2c35-11e7-b97c-0cc47a6bebee\t1096\t38\t96.65\na5b02d2a-2c33-11e7-b97c-0cc47a6bebee\t344\t12\t96.63\n00cfd471-2c34-11e7-b97c-0cc47a6bebee\t1092\t38\t96.64\na98a25e2-2c33-11e7-b97c-0cc47a6bebee\t430\t17\t96.2\na663031d-2c33-11e7-b97c-0cc47a6bebee\t492\t18\t96.47\n987ef372-2c33-11e7-b97c-0cc47a6bebee\t518\t16\t97.0\nda91d0ce-2c35-11e7-b97c-0cc47a6bebee\t193\t8\t96.02\na697b0d4-2c33-11e7-b97c-0cc47a6bebee\t172\t18\t90.53\na60f0dd0-2c33-11e7-b97c-0cc47a6bebee\t505\t16\t96.93\nfa7af5b6-a18e-11e8-ae05-002590e569f4\t944\t90\t91.3\n0b537637-2c34-11e7-b97c-0cc47a6bebee\t493\t29\t94.44\na6bb3cb8-2c33-11e7-b97c-0cc47a6bebee\t498\t16\t96.89\naa52ce2f-2c33-11e7-b97c-0cc47a6bebee\t331\t122\t73.07\na884bc59-2c33-11e7-b97c-0cc47a6bebee\t495\t22\t95.74\n96258686-2c33-11e7-b97c-0cc47a6bebee\t361\t10\t97.3\na61ae83f-2c33-11e7-b97c-0cc47a6bebee\t521\t18\t96.66\nc6fed676-2c33-11e7-b97c-0cc47a6bebee\t451\t10\t97.83\na59f5e6a-2c33-11e7-b97c-0cc47a6bebee\t501\t18\t96.53\n3e182ffc-2c34-11e7-b97c-0cc47a6bebee\t354\t12\t96.72\ne102dc43-2c35-11e7-b97c-0cc47a6bebee\t94\t8\t92.16\na91c86a6-2c33-11e7-b97c-0cc47a6bebee\t352\t12\t96.7\n961c99cc-2c33-11e7-b97c-0cc47a6bebee\t485\t18\t96.42\n9a5bf604-2c33-11e7-b97c-0cc47a6bebee\t512\t17\t96.79\n8c108b98-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\n797b76e6-4ad5-11e7-a936-0cc47a6bebee\t1106\t42\t96.34\na8d5fd9e-2c33-11e7-b97c-0cc47a6bebee\t514\t17\t96.8\ne43792cb-2c33-11e7-b97c-0cc47a6bebee\t1076\t38\t96.59\nb2b8aabc-2c33-11e7-b97c-0cc47a6bebee\t486\t17\t96.62\n66cd285c-b4da-11e8-ae05-002590e569f4\t975\t42\t95.87\nb5c2c35f-2c33-11e7-b97c-0cc47a6bebee\t514\t14\t97.35\n3b153d6c-2c35-11e7-b97c-0cc47a6bebee\t1058\t42\t96.18\ne681062a-2c33-11e7-b97c-0cc47a6bebee\t124\t0\t100.0\na9cfe70a-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\nbba19721-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\n3a2f0a80-2c36-11e7-b97c-0cc47a6bebee\t373\t18\t95.4\na6024293-2c33-11e7-b97c-0cc47a6bebee\t474\t18\t96.34\nf3f50547-2c33-11e7-b97c-0cc47a6bebee\t479\t26\t94.85\na3ed3f19-2c33-11e7-b97c-0cc47a6bebee\t517\t16\t97.0\n7fdcd619-a7d8-11e8-ae05-002590e569f4\t1075\t38\t96.59\n98e0d4ba-2c33-11e7-b97c-0cc47a6bebee\t504\t16\t96.92\na9904bd8-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.64\ne3d6f4a1-2c35-11e7-b97c-0cc47a6bebee\t148\t8\t94.87\na870ff88-2c33-11e7-b97c-0cc47a6bebee\t477\t12\t97.55\na90927d6-2c33-11e7-b97c-0cc47a6bebee\t66\t1\t98.51\n2d07d061-2c34-11e7-b97c-0cc47a6bebee\t319\t15\t95.51\n3b7f5871-2c36-11e7-b97c-0cc47a6bebee\t1037\t37\t96.55\na575e5eb-2c33-11e7-b97c-0cc47a6bebee\t513\t18\t96.61\na8833a84-2c33-11e7-b97c-0cc47a6bebee\t422\t18\t95.91\n988248dd-2c33-11e7-b97c-0cc47a6bebee\t512\t18\t96.6\n8b9bb78d-2c33-11e7-b97c-0cc47a6bebee\t498\t18\t96.51\n8b196414-2c33-11e7-b97c-0cc47a6bebee\t492\t17\t96.66\nc6d0b875-2c33-11e7-b97c-0cc47a6bebee\t445\t19\t95.91\n3a966180-2c35-11e7-b97c-0cc47a6bebee\t1114\t42\t96.37\na608179e-2c33-11e7-b97c-0cc47a6bebee\t338\t12\t96.57\n98e6777b-2c33-11e7-b97c-0cc47a6bebee\t515\t18\t96.62\n39de68f6-2c36-11e7-b97c-0cc47a6bebee\t331\t12\t96.5\nd35f7d85-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\na3c34395-2c33-11e7-b97c-0cc47a6bebee\t486\t18\t96.43\n47be3fa8-2c36-11e7-b97c-0cc47a6bebee\t325\t11\t96.73\na4190715-2c33-11e7-b97c-0cc47a6bebee\t507\t25\t95.3\naabdf6dd-2c33-11e7-b97c-0cc47a6bebee\t509\t15\t97.14\nf058b1b1-2c33-11e7-b97c-0cc47a6bebee\t436\t14\t96.89\nd36546ba-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\n6ce027a5-c87a-11e7-b2b3-ac1f6b055fa6\t502\t18\t96.54\na3a1e0f4-2c33-11e7-b97c-0cc47a6bebee\t512\t18\t96.6\n6be276cb-b4da-11e8-ae05-002590e569f4\t920\t32\t96.64\na874054c-2c33-11e7-b97c-0cc47a6bebee\t514\t18\t96.62\n23e59795-2c34-11e7-b97c-0cc47a6bebee\t348\t194\t64.21\na65bae74-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.64\n86653eee-ad58-11e8-ae05-002590e569f4\t1074\t42\t96.24\n3a2a03dd-2c36-11e7-b97c-0cc47a6bebee\t364\t7\t98.11\n06e51545-2c35-11e7-b97c-0cc47a6bebee\t462\t17\t96.45\n67c022dc-b4da-11e8-ae05-002590e569f4\t1080\t38\t96.6\n2945d835-2c34-11e7-b97c-0cc47a6bebee\t417\t18\t95.86\n708c1a51-2c35-11e7-b97c-0cc47a6bebee\t377\t11\t97.16\n2d2d1f6f-2c34-11e7-b97c-0cc47a6bebee\t517\t18\t96.64\n38bbca56-2c36-11e7-b97c-0cc47a6bebee\t356\t12\t96.74\ndf303b4b-a0c5-11e8-ae05-002590e569f4\t1098\t44\t96.15\n9dbf9757-2c33-11e7-b97c-0cc47a6bebee\t486\t22\t95.67\nb45d387c-2c33-11e7-b97c-0cc47a6bebee\t484\t18\t96.41\n9926bc4e-2c33-11e7-b97c-0cc47a6bebee\t488\t18\t96.44\n5880acad-2c33-11e7-b97c-0cc47a6bebee\t521\t17\t96.84\nd922b970-2c35-11e7-b97c-0cc47a6bebee\t185\t0\t100.0\nd361b8da-2c33-11e7-b97c-0cc47a6bebee\t516\t18\t96.63\n53240fc2-2c35-11e7-b97c-0cc47a6bebee\t491\t20\t96.09\n69f36b7c-2c33-11e7-b97c-0cc47a6bebee\t496\t36\t93.23\na9ad2555-2c33-11e7-b97c-0cc47a6bebee\t517\t20\t96.28\n89ce0310-2c36-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\na9476f00-2c33-11e7-b97c-0cc47a6bebee\t445\t18\t96.11\nb4523d73-2c33-11e7-b97c-0cc47a6bebee\t285\t10\t96.61\ne0fcc859-2c35-11e7-b97c-0cc47a6bebee\t101\t8\t92.66\n68f96ef2-b4da-11e8-ae05-002590e569f4\t1088\t38\t96.63\ne925ddf6-2c33-11e7-b97c-0cc47a6bebee\t509\t16\t96.95\n43955b29-2c36-11e7-b97c-0cc47a6bebee\t310\t12\t96.27\ne0fd97d1-2c35-11e7-b97c-0cc47a6bebee\t186\t8\t95.88\na6816c95-2c33-11e7-b97c-0cc47a6bebee\t429\t16\t96.4\n0b58d41a-2c34-11e7-b97c-0cc47a6bebee\t512\t18\t96.6\na877e22a-2c33-11e7-b97c-0cc47a6bebee\t514\t17\t96.8\nb7abd6aa-2c33-11e7-b97c-0cc47a6bebee\t516\t16\t96.99\n21200df5-2c34-11e7-b97c-0cc47a6bebee\t506\t18\t96.56\nb7ea79d4-2c33-11e7-b97c-0cc47a6bebee\t506\t18\t96.56\nf2629814-2c33-11e7-b97c-0cc47a6bebee\t476\t18\t96.36\naa04e6f6-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n688ffc6e-b4da-11e8-ae05-002590e569f4\t227\t0\t100.0\n87a310d5-8da0-11e7-9e41-0cc47adc2912\t802\t37\t95.59\naa0a4c70-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\n3ae191ac-2c36-11e7-b97c-0cc47a6bebee\t195\t8\t96.06\na31ee70b-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\n38841d29-2c36-11e7-b97c-0cc47a6bebee\t299\t10\t96.76\n2d05a7cb-2c34-11e7-b97c-0cc47a6bebee\t444\t13\t97.16\na6571f32-2c33-11e7-b97c-0cc47a6bebee\t323\t2\t99.38\na3fc849a-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\n91bd9d5e-8da0-11e7-9e41-0cc47adc2912\t1096\t46\t95.97\n98ee92c6-2c33-11e7-b97c-0cc47a6bebee\t502\t18\t96.54\na41e75e2-2c33-11e7-b97c-0cc47a6bebee\t501\t17\t96.72\na41fff8b-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\na81e10e5-2c33-11e7-b97c-0cc47a6bebee\t504\t18\t96.55\n85280495-8da0-11e7-9e41-0cc47adc2912\t1088\t42\t96.28\na1a65b59-2c33-11e7-b97c-0cc47a6bebee\t500\t16\t96.9\nd38b1286-2c33-11e7-b97c-0cc47a6bebee\t486\t14\t97.2\n9ae52576-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\naa91a6dd-2c33-11e7-b97c-0cc47a6bebee\t488\t28\t94.57\n5a3d7358-2c35-11e7-b97c-0cc47a6bebee\t421\t15\t96.56\nb2ce34d0-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\na57044ea-2c33-11e7-b97c-0cc47a6bebee\t366\t10\t97.34\n25c875ae-2c34-11e7-b97c-0cc47a6bebee\t267\t18\t93.68\n481dd50e-2c36-11e7-b97c-0cc47a6bebee\t190\t8\t95.96\ncac058ae-b858-11e8-ae05-002590e569f4\t827\t20\t97.64\nd9b98383-2c35-11e7-b97c-0cc47a6bebee\t59\t0\t100.0\n94781424-8da0-11e7-9e41-0cc47adc2912\t884\t32\t96.51\ne9d577e8-bfee-11e7-b2b3-ac1f6b055fa6\t416\t15\t96.52\n2ea09a91-2c33-11e7-b97c-0cc47a6bebee\t403\t18\t95.72\n404f96c3-cd90-11e8-ae05-002590e569f4\t1084\t48\t95.76\n7d0b4ed7-9f33-11e8-ae05-002590e569f4\t674\t22\t96.84\na522952f-2c33-11e7-b97c-0cc47a6bebee\t485\t18\t96.42\na66f23b9-2c33-11e7-b97c-0cc47a6bebee\t441\t11\t97.57\n8ba985dc-9f33-11e8-ae05-002590e569f4\t1048\t42\t96.15\nda67f192-2c35-11e7-b97c-0cc47a6bebee\t334\t12\t96.53\n2d816769-2c34-11e7-b97c-0cc47a6bebee\t816\t30\t96.45\n9c75fd63-2c33-11e7-b97c-0cc47a6bebee\t452\t14\t97.0\ne4412a6f-2c33-11e7-b97c-0cc47a6bebee\t1078\t42\t96.25\ne0f2b99b-2c35-11e7-b97c-0cc47a6bebee\t73\t4\t94.81\na5ba07ee-2c33-11e7-b97c-0cc47a6bebee\t268\t8\t97.1\na5c21411-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\n088c626c-9cd8-11e8-ae05-002590e569f4\t1096\t38\t96.65\n47c76e82-2c36-11e7-b97c-0cc47a6bebee\t509\t18\t96.58\na6c648e2-2c33-11e7-b97c-0cc47a6bebee\t485\t18\t96.42\nddfa92dc-2c35-11e7-b97c-0cc47a6bebee\t193\t8\t96.02\naa4fafa3-2c33-11e7-b97c-0cc47a6bebee\t476\t16\t96.75\na38487c8-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\na345141e-2c33-11e7-b97c-0cc47a6bebee\t515\t17\t96.8\n3e095a07-2c35-11e7-b97c-0cc47a6bebee\t514\t17\t96.8\n1b0ddd0a-5768-11e7-b1dd-0cc47adc2912\t426\t16\t96.38\nc6fc758e-2c33-11e7-b97c-0cc47a6bebee\t502\t17\t96.72\na53e9222-2c33-11e7-b97c-0cc47a6bebee\t397\t12\t97.07\na51005f6-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\na5605422-2c33-11e7-b97c-0cc47a6bebee\t408\t0\t100.0\n98e79ed4-2c33-11e7-b97c-0cc47a6bebee\t474\t18\t96.34\n8c11c0b8-2c33-11e7-b97c-0cc47a6bebee\t516\t20\t96.27\nd90e3aeb-2c35-11e7-b97c-0cc47a6bebee\t252\t15\t94.38\n98f195b2-2c33-11e7-b97c-0cc47a6bebee\t502\t18\t96.54\na456350a-2c33-11e7-b97c-0cc47a6bebee\t475\t18\t96.35\ne1a28c5d-2c35-11e7-b97c-0cc47a6bebee\t169\t20\t89.42\na92b8a2f-2c33-11e7-b97c-0cc47a6bebee\t518\t19\t96.46\n058c4ad5-2c34-11e7-b97c-0cc47a6bebee\t1104\t42\t96.34\n6a33a635-b4da-11e8-ae05-002590e569f4\t1088\t38\t96.63\nb23ba04f-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n69cbf1d7-b4da-11e8-ae05-002590e569f4\t916\t32\t96.62\nfca96d09-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\n3a1e07aa-2c36-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\nd3603550-2c33-11e7-b97c-0cc47a6bebee\t491\t17\t96.65\n5a45fcc8-2c35-11e7-b97c-0cc47a6bebee\t516\t18\t96.63\nd3839d93-2c33-11e7-b97c-0cc47a6bebee\t494\t18\t96.48\n69eb251e-2c33-11e7-b97c-0cc47a6bebee\t243\t11\t95.67\na832b45d-2c33-11e7-b97c-0cc47a6bebee\t520\t20\t96.3\n7b8c5fb3-9f33-11e8-ae05-002590e569f4\t1013\t38\t96.38\n9ab68069-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64\naa1c7486-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\n96218bcf-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\n0b5be446-2c34-11e7-b97c-0cc47a6bebee\t516\t17\t96.81\n298d57ce-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\na40cefef-2c33-11e7-b97c-0cc47a6bebee\t489\t18\t96.45\na4036268-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\n994a1b81-2c33-11e7-b97c-0cc47a6bebee\t8\t0\t100.0\nde9bceb1-a0c5-11e8-ae05-002590e569f4\t973\t34\t96.62\na5a2c15f-2c33-11e7-b97c-0cc47a6bebee\t461\t17\t96.44\n2e63e138-2c34-11e7-b97c-0cc47a6bebee\t490\t18\t96.46\n37ebb138-2c36-11e7-b97c-0cc47a6bebee\t327\t11\t96.75\nb22dd217-2c33-11e7-b97c-0cc47a6bebee\t484\t13\t97.38\n53c9abc3-2c35-11e7-b97c-0cc47a6bebee\t519\t18\t96.65\naa35be1c-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.67\n3e122352-2c35-11e7-b97c-0cc47a6bebee\t516\t22\t95.91\n484bb4de-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\nd9068715-2c35-11e7-b97c-0cc47a6bebee\t264\t29\t90.1\n0b2eb58b-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\na70f4c65-2c33-11e7-b97c-0cc47a6bebee\t425\t15\t96.59\n44de3ddf-2c36-11e7-b97c-0cc47a6bebee\t302\t12\t96.18\na6762f1b-2c33-11e7-b97c-0cc47a6bebee\t519\t20\t96.29\nf40d0c51-2c33-11e7-b97c-0cc47a6bebee\t507\t18\t96.57\n93438bf9-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\n645d3ef1-b4da-11e8-ae05-002590e569f4\t1102\t38\t96.67\na5311f92-2c33-11e7-b97c-0cc47a6bebee\t381\t14\t96.46\nb292de0c-2c33-11e7-b97c-0cc47a6bebee\t180\t0\t100.0\n97110ab9-2c33-11e7-b97c-0cc47a6bebee\t376\t6\t98.43\n9e1aa497-bb34-11e7-b2b3-ac1f6b055fa6\t457\t18\t96.21\na39287f4-2c33-11e7-b97c-0cc47a6bebee\t510\t18\t96.59\ne061862c-a0c5-11e8-ae05-002590e569f4\t588\t0\t100.0\n0f167849-9cd8-11e8-ae05-002590e569f4\t1092\t44\t96.13\n3e0f626e-2c35-11e7-b97c-0cc47a6bebee\t455\t16\t96.6\n45ee788c-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7\naafe7941-2c33-11e7-b97c-0cc47a6bebee\t188\t10\t94.95\nd10eb2d9-2c33-11e7-b97c-0cc47a6bebee\t478\t33\t93.54\n37ba84b1-2c36-11e7-b97c-0cc47a6bebee\t344\t12\t96.63\n37cfb1f7-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7\n737332a3-2c36-11e7-b97c-0cc47a6bebee\t510\t18\t96.59\n49857004-2c35-11e7-b97c-0cc47a6bebee\t501\t24\t95.43\nf7c93dd4-2c35-11e7-b97c-0cc47a6bebee\t807\t32\t96.19\na7b92741-2c33-11e7-b97c-0cc47a6bebee\t338\t12\t96.57\na955d3f4-2c33-11e7-b97c-0cc47a6bebee\t339\t0\t100.0\na8124ada-2c33-11e7-b97c-0cc47a6bebee\t449\t13\t97.19\n6f45f4a2-b4da-11e8-ae05-002590e569f4\t1056\t38\t96.53\na4590cd8-2c33-11e7-b97c-0cc47a6bebee\t483\t17\t96.6\na45714bc-2c33-11e7-b97c-0cc47a6bebee\t276\t9\t96.84\n2d09493b-2c34-11e7-b97c-0cc47a6bebee\t274\t19\t93.52\nd921341d-2c35-11e7-b97c-0cc47a6bebee\t509\t18\t96.58\n67646d0a-c87a-11e7-b2b3-ac1f6b055fa6\t521\t18\t96.66\na6bc07ad-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.64\nd8f9bda9-2c35-11e7-b97c-0cc47a6bebee\t506\t21\t96.02\naa0312a3-2c33-11e7-b97c-0cc47a6bebee\t483\t18\t96.41\n96cfdd87-2c33-11e7-b97c-0cc47a6bebee\t506\t31\t94.23\na8f15050-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.64\n3c488c14-2c36-11e7-b97c-0cc47a6bebee\t3\t3\t50.0\n3acac8b8-2c36-11e7-b97c-0cc47a6bebee\t184\t4\t97.87\na6588f4d-2c33-11e7-b97c-0cc47a6bebee\t496\t16\t96.88\na3edf4a9-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\nf3ff2ae9-2c33-11e7-b97c-0cc47a6bebee\t225\t4\t98.25\nb2d9cfc2-2c33-11e7-b97c-0cc47a6bebee\t519\t18\t96.65\n90042b88-8da0-11e7-9e41-0cc47adc2912\t874\t32\t96.47\na4103cff-2c33-11e7-b97c-0cc47a6bebee\t352\t12\t96.7\n293e7003-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.65\nb2609540-2c33-11e7-b97c-0cc47a6bebee\t491\t17\t96.65\n311d1df2-2c34-11e7-b97c-0cc47a6bebee\t180\t6\t96.77\nea1a3ebe-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.68\nd902a2ef-2c35-11e7-b97c-0cc47a6bebee\t356\t12\t96.74\nea8c3e98-2c33-11e7-b97c-0cc47a6bebee\t414\t15\t96.5\naa762102-2c33-11e7-b97c-0cc47a6bebee\t225\t6\t97.4\n539e0bff-2c35-11e7-b97c-0cc47a6bebee\t459\t18\t96.23\nc6fe1fd3-2c33-11e7-b97c-0cc47a6bebee\t487\t18\t96.44\n3ae2588e-2c36-11e7-b97c-0cc47a6bebee\t185\t20\t90.24\n96a8cb29-2c33-11e7-b97c-0cc47a6bebee\t513\t18\t96.61\n9a72350f-2c33-11e7-b97c-0cc47a6bebee\t352\t12\t96.7\n2e656559-2c34-11e7-b97c-0cc47a6bebee\t123\t0\t100.0\nda6eabfa-2c35-11e7-b97c-0cc47a6bebee\t500\t16\t96.9\n3b0b5bda-2c35-11e7-b97c-0cc47a6bebee\t910\t44\t95.39\n632916ae-b4da-11e8-ae05-002590e569f4\t1038\t44\t95.93\n9717aac9-2c33-11e7-b97c-0cc47a6bebee\t510\t17\t96.77\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d7",
+            "http://172.17.0.2:4040/jobs/job?id\u003d8",
+            "http://172.17.0.2:4040/jobs/job?id\u003d9",
+            "http://172.17.0.2:4040/jobs/job?id\u003d10",
+            "http://172.17.0.2:4040/jobs/job?id\u003d11"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1564249837504_-810499160",
+      "id": "20190727-175037_267063913",
+      "dateCreated": "2019-07-27 17:50:37.504",
+      "dateStarted": "2019-07-27 20:48:35.323",
+      "dateFinished": "2019-07-27 20:48:41.087",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nval csvUnique \u003d csvData.distinct\nprintln(\"Unique rows: \" + csvUnique.count())\ncsvUnique.createOrReplaceTempView(\"ingestion_unique_view\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-27 20:48:41.117",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Unique rows: 295518\ncsvUnique: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [measurement_datetime: timestamp, device_identifier: string ... 5 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d12"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1564249863787_1562328774",
+      "id": "20190727-175103_2048078009",
+      "dateCreated": "2019-07-27 17:51:03.787",
+      "dateStarted": "2019-07-27 20:48:41.296",
+      "dateFinished": "2019-07-27 20:48:50.616",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark.sql\nSELECT device_identifier, sum(successes), sum(failures), sum(successes)/(sum(successes) + sum(failures))*100.0 as ratio FROM ingestion_unique_view group By device_identifier",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-27 20:48:50.698",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "pieChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "device_identifier": "string",
+                      "sum(successes)": "string",
+                      "sum(failures)": "string",
+                      "ratio": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "pieChart": {}
+              },
+              "commonSetting": {},
+              "keys": [],
+              "groups": [],
+              "values": [
+                {
+                  "name": "sum(successes)",
+                  "index": 1.0,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "sum(failures)",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "device_identifier\tsum(successes)\tsum(failures)\tratio\na9db6f3a-2c33-11e7-b97c-0cc47a6bebee\t420\t17\t96.10983981693364\n56fdb211-2c35-11e7-b97c-0cc47a6bebee\t513\t18\t96.61016949152543\nd9344a18-2c35-11e7-b97c-0cc47a6bebee\t324\t12\t96.42857142857143\n3100fd86-2c34-11e7-b97c-0cc47a6bebee\t481\t18\t96.39278557114228\n2cf2c5ee-2c34-11e7-b97c-0cc47a6bebee\t516\t20\t96.26865671641791\nd9a3e694-2c35-11e7-b97c-0cc47a6bebee\t375\t0\t100.0\n23daa41d-2c34-11e7-b97c-0cc47a6bebee\t497\t18\t96.50485436893203\nd92b3eb8-2c33-11e7-b97c-0cc47a6bebee\t580\t20\t96.66666666666667\nf4088505-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.6355140186916\nc6f2c932-2c33-11e7-b97c-0cc47a6bebee\t420\t12\t97.22222222222221\n3a4a89ea-2c36-11e7-b97c-0cc47a6bebee\t335\t12\t96.54178674351584\nb2481530-2c33-11e7-b97c-0cc47a6bebee\t523\t19\t96.49446494464945\ne2d5a01b-2c35-11e7-b97c-0cc47a6bebee\t179\t7\t96.23655913978494\n8bd0f21b-2c33-11e7-b97c-0cc47a6bebee\t438\t20\t95.63318777292577\n0b7835c4-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n2d0720c8-2c34-11e7-b97c-0cc47a6bebee\t325\t0\t100.0\n715b5a02-0dcb-11e8-8388-ac1f6b055fa6\t523\t18\t96.67282809611831\naa1d942a-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\nb291cf28-2c33-11e7-b97c-0cc47a6bebee\t336\t11\t96.82997118155619\n987fb7a9-2c33-11e7-b97c-0cc47a6bebee\t20\t2\t90.9090909090909\na952aa01-2c33-11e7-b97c-0cc47a6bebee\t441\t0\t100.0\ne5bce14c-2c35-11e7-b97c-0cc47a6bebee\t574\t24\t95.9866220735786\n8522d566-2c36-11e7-b97c-0cc47a6bebee\t478\t17\t96.56565656565657\nf29f1076-2c33-11e7-b97c-0cc47a6bebee\t436\t0\t100.0\n4873bd3f-2c34-11e7-b97c-0cc47a6bebee\t567\t23\t96.10169491525423\na72a0527-2c33-11e7-b97c-0cc47a6bebee\t500\t37\t93.1098696461825\na34797a9-2c33-11e7-b97c-0cc47a6bebee\t483\t20\t96.02385685884693\na7e74d12-2c33-11e7-b97c-0cc47a6bebee\t510\t18\t96.5909090909091\n69fa4c2f-2c33-11e7-b97c-0cc47a6bebee\t348\t16\t95.6043956043956\nde751426-2c33-11e7-b97c-0cc47a6bebee\t445\t19\t95.90517241379311\n47d0947a-2c36-11e7-b97c-0cc47a6bebee\t382\t23\t94.32098765432099\n3ade6445-2c36-11e7-b97c-0cc47a6bebee\t175\t9\t95.1086956521739\na91645c3-2c33-11e7-b97c-0cc47a6bebee\t486\t11\t97.78672032193158\n3cfe5970-2c36-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n0a75003f-9cd8-11e8-ae05-002590e569f4\t493\t15\t97.04724409448819\n3e0bf8e9-2c35-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n3130dd3e-2c34-11e7-b97c-0cc47a6bebee\t350\t14\t96.15384615384616\n223410e0-2c34-11e7-b97c-0cc47a6bebee\t483\t17\t96.6\n47cceef3-2c36-11e7-b97c-0cc47a6bebee\t302\t10\t96.7948717948718\na59a97b0-2c33-11e7-b97c-0cc47a6bebee\t359\t13\t96.50537634408603\nf3fe07df-2c33-11e7-b97c-0cc47a6bebee\t528\t18\t96.7032967032967\n487eaf1b-2c34-11e7-b97c-0cc47a6bebee\t358\t7\t98.08219178082192\na6ac6a1d-2c33-11e7-b97c-0cc47a6bebee\t500\t18\t96.52509652509652\n37e960ff-2c36-11e7-b97c-0cc47a6bebee\t327\t12\t96.46017699115043\n39e24926-2c36-11e7-b97c-0cc47a6bebee\t348\t5\t98.58356940509914\n6c4f1605-b4da-11e8-ae05-002590e569f4\t575\t21\t96.47651006711409\n8536fd60-2c36-11e7-b97c-0cc47a6bebee\t509\t16\t96.95238095238096\nc96ffac6-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\n561c2509-bb34-11e7-b2b3-ac1f6b055fa6\t3\t0\t100.0\na30ca9db-2c33-11e7-b97c-0cc47a6bebee\t503\t18\t96.54510556621881\nb28be17b-2c33-11e7-b97c-0cc47a6bebee\t521\t21\t96.12546125461255\na009ff26-8da0-11e7-9e41-0cc47adc2912\t578\t20\t96.65551839464884\n29db6da7-2c34-11e7-b97c-0cc47a6bebee\t489\t14\t97.21669980119285\na6ec2dd9-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\na50f3d36-2c33-11e7-b97c-0cc47a6bebee\t183\t3\t98.38709677419355\n481a9dcb-2c36-11e7-b97c-0cc47a6bebee\t195\t8\t96.05911330049261\na8e53cb1-2c33-11e7-b97c-0cc47a6bebee\t448\t18\t96.13733905579399\n4390b1f4-2c36-11e7-b97c-0cc47a6bebee\t344\t12\t96.62921348314607\na3f70ae7-2c33-11e7-b97c-0cc47a6bebee\t425\t18\t95.93679458239278\n3ad1d5d5-2c36-11e7-b97c-0cc47a6bebee\t341\t12\t96.60056657223795\nd99d9321-2c35-11e7-b97c-0cc47a6bebee\t193\t8\t96.01990049751244\n8ea55bf4-8da0-11e7-9e41-0cc47adc2912\t479\t18\t96.37826961770624\nd8e57183-2c33-11e7-b97c-0cc47a6bebee\t508\t18\t96.57794676806084\naa95c3ce-2c33-11e7-b97c-0cc47a6bebee\t231\t7\t97.05882352941177\n375aa4b9-2c36-11e7-b97c-0cc47a6bebee\t332\t12\t96.51162790697676\n23d8c0c8-2c34-11e7-b97c-0cc47a6bebee\t493\t18\t96.4774951076321\n3b138dc2-2c35-11e7-b97c-0cc47a6bebee\t515\t22\t95.90316573556798\na6e9f6a2-2c33-11e7-b97c-0cc47a6bebee\t413\t17\t96.04651162790697\n440d3607-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7032967032967\n3e1a5eb1-2c34-11e7-b97c-0cc47a6bebee\t459\t16\t96.63157894736842\nc7cf4130-2c33-11e7-b97c-0cc47a6bebee\t486\t13\t97.39478957915831\n29e0c433-2c34-11e7-b97c-0cc47a6bebee\t183\t9\t95.3125\n39d03be9-2c33-11e7-b97c-0cc47a6bebee\t276\t13\t95.50173010380622\n99c0e766-2c33-11e7-b97c-0cc47a6bebee\t464\t0\t100.0\nb2760a7f-2c33-11e7-b97c-0cc47a6bebee\t414\t16\t96.27906976744185\n3cc9bb36-2c36-11e7-b97c-0cc47a6bebee\t319\t10\t96.96048632218846\n439b99d6-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7032967032967\na30564e6-2c33-11e7-b97c-0cc47a6bebee\t452\t15\t96.78800856531049\nb4f10cf2-2c33-11e7-b97c-0cc47a6bebee\t525\t18\t96.68508287292818\nb47cc443-2c33-11e7-b97c-0cc47a6bebee\t413\t13\t96.94835680751174\n41f3914d-a3a1-11e7-9e41-0cc47adc2912\t0\t233\t0.0\ne0e54276-2c35-11e7-b97c-0cc47a6bebee\t179\t8\t95.72192513368985\nb5c9c1d4-2c33-11e7-b97c-0cc47a6bebee\t431\t8\t98.17767653758543\n484c82b4-2c34-11e7-b97c-0cc47a6bebee\t522\t24\t95.6043956043956\n58283ec8-2c33-11e7-b97c-0cc47a6bebee\t506\t17\t96.74952198852772\nbe962e6b-4230-11e7-b154-0cc47a6bebee\t476\t18\t96.35627530364373\n99e7f338-2c33-11e7-b97c-0cc47a6bebee\t497\t16\t96.88109161793372\n3127c673-2c34-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\nfd0528fa-a18e-11e8-ae05-002590e569f4\t584\t20\t96.68874172185431\na9b80501-2c33-11e7-b97c-0cc47a6bebee\t523\t18\t96.67282809611831\na80092b9-2c33-11e7-b97c-0cc47a6bebee\t489\t18\t96.44970414201184\na9d60b5a-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\n69e47939-2c33-11e7-b97c-0cc47a6bebee\t466\t11\t97.69392033542978\na5679d55-2c33-11e7-b97c-0cc47a6bebee\t233\t9\t96.28099173553719\n388af32c-2c36-11e7-b97c-0cc47a6bebee\t316\t12\t96.34146341463415\n479e9a79-2c36-11e7-b97c-0cc47a6bebee\t159\t0\t100.0\n3dec8d8c-2c35-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\na3aa59a9-2c33-11e7-b97c-0cc47a6bebee\t521\t21\t96.12546125461255\na58f474d-2c33-11e7-b97c-0cc47a6bebee\t453\t16\t96.58848614072495\n0ac0131b-9cd8-11e8-ae05-002590e569f4\t471\t14\t97.11340206185567\nb2a0f806-2c33-11e7-b97c-0cc47a6bebee\t500\t18\t96.52509652509652\n2cee094d-2c34-11e7-b97c-0cc47a6bebee\t507\t18\t96.57142857142857\n6e046d76-b4da-11e8-ae05-002590e569f4\t555\t26\t95.5249569707401\na58e6ed5-2c33-11e7-b97c-0cc47a6bebee\t513\t18\t96.61016949152543\n6cc20611-b4da-11e8-ae05-002590e569f4\t559\t20\t96.54576856649395\nc0b7695c-2c35-11e7-b97c-0cc47a6bebee\t96\t0\t100.0\n97983ff7-c87a-11e7-b2b3-ac1f6b055fa6\t180\t18\t90.9090909090909\nc6f82d76-2c33-11e7-b97c-0cc47a6bebee\t231\t8\t96.65271966527197\na2f71852-2c33-11e7-b97c-0cc47a6bebee\t485\t15\t97.0\n44b346b6-2c36-11e7-b97c-0cc47a6bebee\t338\t18\t94.9438202247191\n0b5b1978-2c34-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\n0b6e8a8e-2c34-11e7-b97c-0cc47a6bebee\t476\t18\t96.35627530364373\ne52a7a57-2c35-11e7-b97c-0cc47a6bebee\t515\t20\t96.26168224299066\n8c1e5fa7-2c33-11e7-b97c-0cc47a6bebee\t505\t18\t96.5583173996176\n45c481f5-2c36-11e7-b97c-0cc47a6bebee\t489\t18\t96.44970414201184\na92090b6-2c33-11e7-b97c-0cc47a6bebee\t486\t16\t96.81274900398407\n3767ec66-2c36-11e7-b97c-0cc47a6bebee\t310\t12\t96.27329192546584\nb4f60cd8-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\na641f9dc-2c33-11e7-b97c-0cc47a6bebee\t392\t0\t100.0\n69623f41-b4da-11e8-ae05-002590e569f4\t569\t23\t96.11486486486487\na9ec612b-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\nf695e646-2c33-11e7-b97c-0cc47a6bebee\t495\t18\t96.49122807017544\n3ac5fff7-2c35-11e7-b97c-0cc47a6bebee\t569\t23\t96.11486486486487\na9a15c2d-2c33-11e7-b97c-0cc47a6bebee\t467\t18\t96.28865979381443\n60abb56d-b4da-11e8-ae05-002590e569f4\t561\t20\t96.55765920826161\nf4067b73-2c33-11e7-b97c-0cc47a6bebee\t515\t18\t96.62288930581614\n0b9393f7-2c34-11e7-b97c-0cc47a6bebee\t499\t17\t96.70542635658916\n98ec6b7f-2c33-11e7-b97c-0cc47a6bebee\t495\t18\t96.49122807017544\naabeb84c-2c33-11e7-b97c-0cc47a6bebee\t64\t3\t95.52238805970148\n3945c401-2c34-11e7-b97c-0cc47a6bebee\t70\t0\t100.0\n38bf6b05-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7032967032967\n5332bb9f-2c35-11e7-b97c-0cc47a6bebee\t506\t17\t96.74952198852772\n988493e5-2c33-11e7-b97c-0cc47a6bebee\t521\t18\t96.66048237476808\n0bebf443-9cd8-11e8-ae05-002590e569f4\t526\t26\t95.28985507246377\n9cb4bc69-2c33-11e7-b97c-0cc47a6bebee\t516\t18\t96.62921348314607\n2d624dbc-2c34-11e7-b97c-0cc47a6bebee\t292\t23\t92.6984126984127\na40ea121-2c33-11e7-b97c-0cc47a6bebee\t504\t18\t96.55172413793103\na8b6efab-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\n682934f9-b4da-11e8-ae05-002590e569f4\t343\t21\t94.23076923076923\n81252054-c87a-11e7-b2b3-ac1f6b055fa6\t521\t18\t96.66048237476808\n45ce9eb2-2c36-11e7-b97c-0cc47a6bebee\t452\t15\t96.78800856531049\n3e03aa75-2c35-11e7-b97c-0cc47a6bebee\t498\t18\t96.51162790697676\na3baabab-2c33-11e7-b97c-0cc47a6bebee\t502\t18\t96.53846153846153\nf3b15e0c-2c33-11e7-b97c-0cc47a6bebee\t472\t16\t96.72131147540983\n2950102f-2c34-11e7-b97c-0cc47a6bebee\t273\t8\t97.15302491103202\n4869498e-2c34-11e7-b97c-0cc47a6bebee\t568\t20\t96.5986394557823\n47ced34a-0d02-11e8-8388-ac1f6b055fa6\t561\t26\t95.57069846678023\na39b98c4-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.6355140186916\nd35ab445-2c33-11e7-b97c-0cc47a6bebee\t505\t17\t96.74329501915709\nf2609f4f-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\nb45df5cc-2c33-11e7-b97c-0cc47a6bebee\t381\t17\t95.7286432160804\n9a861b31-2c33-11e7-b97c-0cc47a6bebee\t473\t17\t96.53061224489797\n467bac28-2c36-11e7-b97c-0cc47a6bebee\t309\t6\t98.09523809523809\n44b02431-2c36-11e7-b97c-0cc47a6bebee\t346\t16\t95.58011049723757\n23d27706-2c34-11e7-b97c-0cc47a6bebee\t396\t18\t95.65217391304348\na5bc75d7-2c33-11e7-b97c-0cc47a6bebee\t344\t0\t100.0\na67ae91c-2c33-11e7-b97c-0cc47a6bebee\t425\t0\t100.0\n64c31c0e-b4da-11e8-ae05-002590e569f4\t590\t20\t96.72131147540983\n707fd9b4-2c35-11e7-b97c-0cc47a6bebee\t213\t11\t95.08928571428571\nd8aa11a5-2c35-11e7-b97c-0cc47a6bebee\t176\t8\t95.65217391304348\na5ac5610-2c33-11e7-b97c-0cc47a6bebee\t490\t18\t96.45669291338582\n38b1321b-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7032967032967\n0b25f80d-2c34-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\ne1698c7a-2c35-11e7-b97c-0cc47a6bebee\t143\t5\t96.62162162162163\n0444d68d-2c34-11e7-b97c-0cc47a6bebee\t14\t0\t100.0\ne16c14b5-2c35-11e7-b97c-0cc47a6bebee\t161\t42\t79.3103448275862\n27fa06d7-2c34-11e7-b97c-0cc47a6bebee\t466\t16\t96.6804979253112\n0b5a595c-2c34-11e7-b97c-0cc47a6bebee\t394\t14\t96.56862745098039\n9492ce77-2c35-11e7-b97c-0cc47a6bebee\t452\t15\t96.78800856531049\nd8af8468-2c35-11e7-b97c-0cc47a6bebee\t179\t8\t95.72192513368985\n992b41fb-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\n6d45bc87-4ad5-11e7-a936-0cc47a6bebee\t518\t24\t95.5719557195572\na313e7de-2c33-11e7-b97c-0cc47a6bebee\t516\t18\t96.62921348314607\n9325a100-8da0-11e7-9e41-0cc47adc2912\t407\t22\t94.87179487179486\n2cef9134-2c34-11e7-b97c-0cc47a6bebee\t341\t12\t96.60056657223795\n31264c0a-2c34-11e7-b97c-0cc47a6bebee\t461\t10\t97.87685774946921\ne5271a2a-2c35-11e7-b97c-0cc47a6bebee\t387\t14\t96.50872817955111\n47f46831-2c36-11e7-b97c-0cc47a6bebee\t187\t8\t95.8974358974359\n0925a22d-9cd8-11e8-ae05-002590e569f4\t566\t16\t97.2508591065292\ncb20a04b-bb34-11e7-b2b3-ac1f6b055fa6\t355\t3\t99.16201117318437\n47f836d3-2c36-11e7-b97c-0cc47a6bebee\t185\t8\t95.85492227979275\n06db647f-2c35-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\na8d39b4d-2c33-11e7-b97c-0cc47a6bebee\t476\t18\t96.35627530364373\n21b9786b-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\na3230ad7-2c33-11e7-b97c-0cc47a6bebee\t514\t18\t96.61654135338345\n45eb4ac9-2c36-11e7-b97c-0cc47a6bebee\t74\t3\t96.1038961038961\na92d0696-2c33-11e7-b97c-0cc47a6bebee\t356\t10\t97.26775956284153\nf29d736c-2c33-11e7-b97c-0cc47a6bebee\t294\t15\t95.14563106796116\n2d7369be-2c34-11e7-b97c-0cc47a6bebee\t505\t8\t98.44054580896686\n2ed52696-2c34-11e7-b97c-0cc47a6bebee\t486\t17\t96.62027833001989\n6529412f-b4da-11e8-ae05-002590e569f4\t549\t20\t96.48506151142355\naa118132-2c33-11e7-b97c-0cc47a6bebee\t487\t16\t96.81908548707754\n8552c19f-2c33-11e7-b97c-0cc47a6bebee\t515\t18\t96.62288930581614\nd356dafd-2c33-11e7-b97c-0cc47a6bebee\t465\t16\t96.67359667359668\naadf6314-2c33-11e7-b97c-0cc47a6bebee\t132\t10\t92.95774647887323\n2d0087a3-2c34-11e7-b97c-0cc47a6bebee\t501\t16\t96.90522243713733\n961e3da1-2c33-11e7-b97c-0cc47a6bebee\t509\t21\t96.0377358490566\ne67f5cce-2c33-11e7-b97c-0cc47a6bebee\t521\t18\t96.66048237476808\na5a1fa17-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\nc7904461-2c33-11e7-b97c-0cc47a6bebee\t320\t12\t96.3855421686747\n2af8ba70-2c34-11e7-b97c-0cc47a6bebee\t408\t12\t97.14285714285714\n54c5e6ed-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n0c81da3f-9cd8-11e8-ae05-002590e569f4\t466\t17\t96.48033126293996\na68f1800-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n25b94726-2c34-11e7-b97c-0cc47a6bebee\t506\t16\t96.93486590038314\n0b46ee98-2c34-11e7-b97c-0cc47a6bebee\t517\t16\t96.99812382739212\na8cbd108-2c33-11e7-b97c-0cc47a6bebee\t407\t14\t96.67458432304038\na86ce25d-2c33-11e7-b97c-0cc47a6bebee\t522\t20\t96.30996309963099\nb7cb7739-2c33-11e7-b97c-0cc47a6bebee\t335\t11\t96.82080924855492\n485ad193-2c35-11e7-b97c-0cc47a6bebee\t488\t18\t96.44268774703558\nfb0bd4e4-a18e-11e8-ae05-002590e569f4\t574\t22\t96.30872483221476\na5b83b22-2c33-11e7-b97c-0cc47a6bebee\t490\t18\t96.45669291338582\n9aeba87d-2c33-11e7-b97c-0cc47a6bebee\t482\t20\t96.01593625498009\n4843e60f-2c34-11e7-b97c-0cc47a6bebee\t246\t7\t97.23320158102767\neabcc61d-2c33-11e7-b97c-0cc47a6bebee\t498\t18\t96.51162790697676\n98e193d1-2c33-11e7-b97c-0cc47a6bebee\t431\t19\t95.77777777777777\na6b9409b-2c33-11e7-b97c-0cc47a6bebee\t341\t11\t96.875\n3e1beef6-2c34-11e7-b97c-0cc47a6bebee\t170\t0\t100.0\n47f8f910-2c36-11e7-b97c-0cc47a6bebee\t170\t7\t96.045197740113\nb4f7284b-2c33-11e7-b97c-0cc47a6bebee\t518\t22\t95.92592592592592\na8af4cc5-2c33-11e7-b97c-0cc47a6bebee\t507\t18\t96.57142857142857\nc88f7c21-2c33-11e7-b97c-0cc47a6bebee\t496\t15\t97.06457925636008\n9a708f0e-2c33-11e7-b97c-0cc47a6bebee\t512\t18\t96.60377358490567\n4393ead6-2c36-11e7-b97c-0cc47a6bebee\t318\t12\t96.36363636363636\na7912ab3-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\na65e4117-2c33-11e7-b97c-0cc47a6bebee\t498\t20\t96.13899613899613\nd0c1908a-2c33-11e7-b97c-0cc47a6bebee\t375\t9\t97.65625\na8a6e13b-2c33-11e7-b97c-0cc47a6bebee\t502\t18\t96.53846153846153\na3492134-2c33-11e7-b97c-0cc47a6bebee\t512\t18\t96.60377358490567\n3057ef02-a3a1-11e7-9e41-0cc47adc2912\t582\t20\t96.67774086378738\n996b81c8-8da0-11e7-9e41-0cc47adc2912\t577\t20\t96.64991624790619\n07104374-9cd8-11e8-ae05-002590e569f4\t380\t24\t94.05940594059405\nd8a3ce9d-2c35-11e7-b97c-0cc47a6bebee\t155\t8\t95.0920245398773\nc6d56f52-2c33-11e7-b97c-0cc47a6bebee\t392\t12\t97.02970297029702\na466e6d3-2c33-11e7-b97c-0cc47a6bebee\t498\t17\t96.69902912621359\na303d3ea-2c33-11e7-b97c-0cc47a6bebee\t344\t10\t97.17514124293785\na3eebb39-2c33-11e7-b97c-0cc47a6bebee\t516\t18\t96.62921348314607\n4825c67e-2c36-11e7-b97c-0cc47a6bebee\t233\t0\t100.0\n3da1634e-2c35-11e7-b97c-0cc47a6bebee\t515\t17\t96.80451127819549\n98e858ef-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\n4a07c5dc-bb34-11e7-b2b3-ac1f6b055fa6\t483\t18\t96.40718562874252\n481cfb1e-2c36-11e7-b97c-0cc47a6bebee\t199\t8\t96.1352657004831\na42cfbe3-2c33-11e7-b97c-0cc47a6bebee\t521\t17\t96.84014869888475\n94b458ab-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.6355140186916\na9b2af00-2c33-11e7-b97c-0cc47a6bebee\t502\t16\t96.91119691119691\nfcad55b5-2c33-11e7-b97c-0cc47a6bebee\t472\t21\t95.74036511156187\ne0e6abd5-2c35-11e7-b97c-0cc47a6bebee\t146\t7\t95.42483660130719\ncf827db7-2c33-11e7-b97c-0cc47a6bebee\t233\t17\t93.2\ne70613c3-2c33-11e7-b97c-0cc47a6bebee\t503\t20\t96.17590822179733\naa4176ff-2c33-11e7-b97c-0cc47a6bebee\t509\t17\t96.7680608365019\n0b4adc59-2c34-11e7-b97c-0cc47a6bebee\t526\t18\t96.69117647058823\n3c8948e5-2c36-11e7-b97c-0cc47a6bebee\t517\t17\t96.81647940074907\na8b2da43-2c33-11e7-b97c-0cc47a6bebee\t526\t18\t96.69117647058823\naa86bed5-2c33-11e7-b97c-0cc47a6bebee\t388\t13\t96.75810473815461\ne17f04c1-2c35-11e7-b97c-0cc47a6bebee\t108\t2\t98.18181818181819\n831651b0-9f33-11e8-ae05-002590e569f4\t575\t19\t96.8013468013468\nc6fbc250-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n38932009-2c36-11e7-b97c-0cc47a6bebee\t348\t12\t96.66666666666667\na3ef7f3d-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n3cbca463-2c36-11e7-b97c-0cc47a6bebee\t344\t12\t96.62921348314607\nfa95cec1-2c33-11e7-b97c-0cc47a6bebee\t521\t18\t96.66048237476808\n3e217f3f-2c35-11e7-b97c-0cc47a6bebee\t503\t20\t96.17590822179733\na3f1d3b4-2c33-11e7-b97c-0cc47a6bebee\t480\t20\t96.0\nd8e7fc8a-2c33-11e7-b97c-0cc47a6bebee\t141\t3\t97.91666666666666\na791f216-2c33-11e7-b97c-0cc47a6bebee\t243\t12\t95.29411764705881\ne1008e51-2c35-11e7-b97c-0cc47a6bebee\t173\t8\t95.58011049723757\na706218c-2c33-11e7-b97c-0cc47a6bebee\t515\t17\t96.80451127819549\n3abc96da-2c35-11e7-b97c-0cc47a6bebee\t573\t23\t96.14093959731544\n47bb5181-2c36-11e7-b97c-0cc47a6bebee\t516\t18\t96.62921348314607\nea932e58-2c33-11e7-b97c-0cc47a6bebee\t514\t18\t96.61654135338345\n8aebf691-c87a-11e7-b2b3-ac1f6b055fa6\t360\t7\t98.09264305177112\n656edc9e-bb34-11e7-b2b3-ac1f6b055fa6\t472\t11\t97.72256728778468\na5927152-2c33-11e7-b97c-0cc47a6bebee\t505\t17\t96.74329501915709\n481b739d-2c36-11e7-b97c-0cc47a6bebee\t161\t6\t96.40718562874252\n2e648aad-2c34-11e7-b97c-0cc47a6bebee\t452\t18\t96.17021276595744\n84734f13-b6c6-11e8-ae05-002590e569f4\t580\t20\t96.66666666666667\na9937167-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n5a18bde1-2c35-11e7-b97c-0cc47a6bebee\t516\t22\t95.91078066914498\n0b4d38b9-2c34-11e7-b97c-0cc47a6bebee\t524\t22\t95.97069597069597\n23e667dd-2c34-11e7-b97c-0cc47a6bebee\t505\t17\t96.74329501915709\n43995345-2c36-11e7-b97c-0cc47a6bebee\t324\t12\t96.42857142857143\n6aa3f285-b4da-11e8-ae05-002590e569f4\t572\t20\t96.62162162162163\n9d1da93b-bc46-11e8-ae05-002590e569f4\t562\t20\t96.56357388316151\n37cbae4a-2c36-11e7-b97c-0cc47a6bebee\t320\t12\t96.3855421686747\nda3c25a4-2c35-11e7-b97c-0cc47a6bebee\t199\t8\t96.1352657004831\n9c20024e-8da0-11e7-9e41-0cc47adc2912\t554\t39\t93.42327150084317\n584c945d-2c33-11e7-b97c-0cc47a6bebee\t501\t17\t96.71814671814671\na52a4d5a-2c33-11e7-b97c-0cc47a6bebee\t506\t20\t96.1977186311787\n9a7872c0-2c33-11e7-b97c-0cc47a6bebee\t500\t18\t96.52509652509652\n3c7485b4-2c34-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\ne17a4b3d-2c35-11e7-b97c-0cc47a6bebee\t198\t8\t96.11650485436894\nea8619f0-2c33-11e7-b97c-0cc47a6bebee\t178\t5\t97.26775956284153\n3eeb1191-2c34-11e7-b97c-0cc47a6bebee\t41\t0\t100.0\n948ae72b-2c33-11e7-b97c-0cc47a6bebee\t503\t18\t96.54510556621881\na55ad6d5-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\n4863e841-2c34-11e7-b97c-0cc47a6bebee\t554\t18\t96.85314685314685\na388534d-2c33-11e7-b97c-0cc47a6bebee\t534\t21\t96.21621621621622\na3b070b0-2c33-11e7-b97c-0cc47a6bebee\t516\t18\t96.62921348314607\n3d19de2b-2c36-11e7-b97c-0cc47a6bebee\t184\t8\t95.83333333333334\nfbdff6c5-2c33-11e7-b97c-0cc47a6bebee\t13\t1\t92.85714285714286\n82758d22-9f33-11e8-ae05-002590e569f4\t489\t23\t95.5078125\ne9548a0b-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\n26383f6b-2c34-11e7-b97c-0cc47a6bebee\t206\t2\t99.03846153846155\nd89fe3c2-2c35-11e7-b97c-0cc47a6bebee\t105\t7\t93.75\n94d8f559-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\ne1642025-2c35-11e7-b97c-0cc47a6bebee\t189\t8\t95.93908629441624\n3e28a984-2c35-11e7-b97c-0cc47a6bebee\t465\t20\t95.87628865979381\n98f4d763-2c33-11e7-b97c-0cc47a6bebee\t506\t18\t96.56488549618321\n44f1630c-2c36-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\n2220cdac-2c34-11e7-b97c-0cc47a6bebee\t493\t18\t96.4774951076321\na643621b-2c33-11e7-b97c-0cc47a6bebee\t526\t18\t96.69117647058823\n9e399765-2c33-11e7-b97c-0cc47a6bebee\t493\t15\t97.04724409448819\n37909381-2c36-11e7-b97c-0cc47a6bebee\t328\t12\t96.47058823529412\na5375f09-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\n99cc2d82-2c33-11e7-b97c-0cc47a6bebee\t462\t16\t96.65271966527197\n21c2c258-2c34-11e7-b97c-0cc47a6bebee\t379\t18\t95.46599496221663\n992f1819-2c33-11e7-b97c-0cc47a6bebee\t514\t17\t96.7984934086629\n29e18e27-2c34-11e7-b97c-0cc47a6bebee\t491\t18\t96.46365422396856\na9002661-2c33-11e7-b97c-0cc47a6bebee\t368\t0\t100.0\nf796258f-2c33-11e7-b97c-0cc47a6bebee\t506\t8\t98.44357976653697\n73a30682-2c36-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n47a4fb64-2c36-11e7-b97c-0cc47a6bebee\t324\t12\t96.42857142857143\na7f0b42b-2c33-11e7-b97c-0cc47a6bebee\t481\t18\t96.39278557114228\na95ad0f7-2c33-11e7-b97c-0cc47a6bebee\t514\t18\t96.61654135338345\na95157d0-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\n3e0e9c76-2c35-11e7-b97c-0cc47a6bebee\t462\t18\t96.25\na6354f06-2c33-11e7-b97c-0cc47a6bebee\t500\t33\t93.80863039399625\n969b143e-2c33-11e7-b97c-0cc47a6bebee\t511\t18\t96.59735349716446\nd3698009-2c33-11e7-b97c-0cc47a6bebee\t373\t18\t95.39641943734016\n6b7a68f0-b4da-11e8-ae05-002590e569f4\t539\t20\t96.42218246869409\na439c567-2c33-11e7-b97c-0cc47a6bebee\t390\t11\t97.2568578553616\n393659ee-2c35-11e7-b97c-0cc47a6bebee\t584\t20\t96.68874172185431\n2ceec93b-2c34-11e7-b97c-0cc47a6bebee\t491\t15\t97.03557312252964\n63f5433e-b4da-11e8-ae05-002590e569f4\t576\t34\t94.42622950819673\n2d225dce-2c34-11e7-b97c-0cc47a6bebee\t517\t20\t96.2756052141527\n362fb66d-a3a1-11e7-9e41-0cc47adc2912\t573\t19\t96.79054054054053\n3b0dbb18-2c35-11e7-b97c-0cc47a6bebee\t580\t20\t96.66666666666667\nb461cd9e-2c33-11e7-b97c-0cc47a6bebee\t506\t18\t96.56488549618321\nc6d2df68-2c33-11e7-b97c-0cc47a6bebee\t307\t18\t94.46153846153847\n84240f69-b6c6-11e8-ae05-002590e569f4\t580\t20\t96.66666666666667\ndfb21750-a0c5-11e8-ae05-002590e569f4\t586\t23\t96.2233169129721\na8813221-2c33-11e7-b97c-0cc47a6bebee\t514\t18\t96.61654135338345\n94da1386-9f33-11e8-ae05-002590e569f4\t574\t20\t96.63299663299664\n1a8175f8-c87d-11e7-b2b3-ac1f6b055fa6\t526\t21\t96.16087751371116\n3a9f0629-2c35-11e7-b97c-0cc47a6bebee\t562\t21\t96.39794168096056\n98e25a5e-2c33-11e7-b97c-0cc47a6bebee\t496\t18\t96.49805447470817\ne10b6653-2c35-11e7-b97c-0cc47a6bebee\t189\t8\t95.93908629441624\n0b751f6e-2c34-11e7-b97c-0cc47a6bebee\t521\t18\t96.66048237476808\n48277cc0-2c36-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\n58b51998-2c33-11e7-b97c-0cc47a6bebee\t518\t22\t95.92592592592592\n2d04d2ec-2c34-11e7-b97c-0cc47a6bebee\t506\t18\t96.56488549618321\n279f69c2-2c34-11e7-b97c-0cc47a6bebee\t512\t18\t96.60377358490567\n2228a24c-2c34-11e7-b97c-0cc47a6bebee\t234\t0\t100.0\na3da139f-2c33-11e7-b97c-0cc47a6bebee\t292\t6\t97.98657718120806\n389c8681-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7032967032967\n99d7a73a-2c33-11e7-b97c-0cc47a6bebee\t523\t18\t96.67282809611831\n29e00491-2c34-11e7-b97c-0cc47a6bebee\t501\t18\t96.53179190751445\na4c3747e-2c33-11e7-b97c-0cc47a6bebee\t442\t14\t96.9298245614035\n8ab22b2e-9f33-11e8-ae05-002590e569f4\t553\t43\t92.78523489932886\nd9ab5d2c-2c35-11e7-b97c-0cc47a6bebee\t423\t18\t95.91836734693877\ne0e3795b-2c35-11e7-b97c-0cc47a6bebee\t123\t5\t96.09375\ne5245efe-2c35-11e7-b97c-0cc47a6bebee\t548\t22\t96.14035087719299\na9fb27cc-2c33-11e7-b97c-0cc47a6bebee\t508\t18\t96.57794676806084\n05aa058e-2c34-11e7-b97c-0cc47a6bebee\t576\t20\t96.64429530201343\n971469b0-2c33-11e7-b97c-0cc47a6bebee\t273\t13\t95.45454545454545\n4644aa15-2c36-11e7-b97c-0cc47a6bebee\t203\t8\t96.2085308056872\n3cbaef5b-2c36-11e7-b97c-0cc47a6bebee\t467\t18\t96.28865979381443\n21bcc2bd-2c34-11e7-b97c-0cc47a6bebee\t514\t18\t96.61654135338345\n0b21bf65-2c34-11e7-b97c-0cc47a6bebee\t488\t18\t96.44268774703558\na9994d5e-2c33-11e7-b97c-0cc47a6bebee\t509\t17\t96.7680608365019\na7146f9e-2c33-11e7-b97c-0cc47a6bebee\t512\t21\t96.06003752345215\n37e4c912-2c36-11e7-b97c-0cc47a6bebee\t326\t12\t96.44970414201184\n99d04d18-2c35-11e7-b97c-0cc47a6bebee\t348\t20\t94.56521739130434\nfb8993dd-2c33-11e7-b97c-0cc47a6bebee\t460\t18\t96.23430962343096\ndffb1ddd-a0c5-11e8-ae05-002590e569f4\t592\t20\t96.73202614379085\nd90904b9-2c35-11e7-b97c-0cc47a6bebee\t426\t18\t95.94594594594594\na12d4d18-8da0-11e7-9e41-0cc47adc2912\t451\t17\t96.36752136752136\neac3fa77-2c33-11e7-b97c-0cc47a6bebee\t291\t25\t92.08860759493672\na3bb75f4-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\n462a8a33-2c36-11e7-b97c-0cc47a6bebee\t434\t0\t100.0\n0ccd4bd3-9cd8-11e8-ae05-002590e569f4\t575\t25\t95.83333333333334\n99236d8a-2c33-11e7-b97c-0cc47a6bebee\t518\t20\t96.28252788104089\n9a696f03-2c33-11e7-b97c-0cc47a6bebee\t431\t14\t96.85393258426967\n638e9aa5-b4da-11e8-ae05-002590e569f4\t510\t17\t96.7741935483871\n5787f3aa-2c35-11e7-b97c-0cc47a6bebee\t509\t17\t96.7680608365019\nfe61213d-2c33-11e7-b97c-0cc47a6bebee\t517\t17\t96.81647940074907\n81a7ea53-9f33-11e8-ae05-002590e569f4\t573\t20\t96.62731871838112\na7a739af-2c33-11e7-b97c-0cc47a6bebee\t344\t12\t96.62921348314607\nb276e8b5-2c33-11e7-b97c-0cc47a6bebee\t478\t18\t96.37096774193549\n27a02ad0-2c34-11e7-b97c-0cc47a6bebee\t438\t18\t96.05263157894737\n6e72837f-b4da-11e8-ae05-002590e569f4\t519\t20\t96.28942486085343\na41f41f1-2c33-11e7-b97c-0cc47a6bebee\t498\t17\t96.69902912621359\naaecec61-2c33-11e7-b97c-0cc47a6bebee\t528\t18\t96.7032967032967\na6770816-2c33-11e7-b97c-0cc47a6bebee\t60\t5\t92.3076923076923\n7e34cb33-9f33-11e8-ae05-002590e569f4\t494\t17\t96.67318982387475\n2d01eeab-2c34-11e7-b97c-0cc47a6bebee\t471\t29\t94.19999999999999\n0fb15764-9cd8-11e8-ae05-002590e569f4\t558\t25\t95.71183533447685\na6bfdcab-2c33-11e7-b97c-0cc47a6bebee\t518\t17\t96.82242990654206\nd337be84-2c33-11e7-b97c-0cc47a6bebee\t441\t12\t97.35099337748345\ne1091e29-2c35-11e7-b97c-0cc47a6bebee\t188\t6\t96.90721649484536\na5b02d2a-2c33-11e7-b97c-0cc47a6bebee\t344\t12\t96.62921348314607\n39373305-2c35-11e7-b97c-0cc47a6bebee\t571\t20\t96.61590524534687\n3af0b91f-2c35-11e7-b97c-0cc47a6bebee\t576\t20\t96.64429530201343\na663031d-2c33-11e7-b97c-0cc47a6bebee\t492\t18\t96.47058823529412\n00cfd471-2c34-11e7-b97c-0cc47a6bebee\t576\t20\t96.64429530201343\na98a25e2-2c33-11e7-b97c-0cc47a6bebee\t430\t17\t96.19686800894854\n987ef372-2c33-11e7-b97c-0cc47a6bebee\t518\t16\t97.00374531835206\nda91d0ce-2c35-11e7-b97c-0cc47a6bebee\t193\t8\t96.01990049751244\na697b0d4-2c33-11e7-b97c-0cc47a6bebee\t172\t18\t90.52631578947368\na60f0dd0-2c33-11e7-b97c-0cc47a6bebee\t505\t16\t96.92898272552783\na6bb3cb8-2c33-11e7-b97c-0cc47a6bebee\t498\t16\t96.88715953307393\nfa7af5b6-a18e-11e8-ae05-002590e569f4\t499\t48\t91.22486288848263\n0b537637-2c34-11e7-b97c-0cc47a6bebee\t493\t29\t94.44444444444444\n96258686-2c33-11e7-b97c-0cc47a6bebee\t361\t10\t97.30458221024259\na884bc59-2c33-11e7-b97c-0cc47a6bebee\t495\t22\t95.74468085106383\naa52ce2f-2c33-11e7-b97c-0cc47a6bebee\t331\t122\t73.06843267108167\nc6fed676-2c33-11e7-b97c-0cc47a6bebee\t451\t10\t97.83080260303689\n3e182ffc-2c34-11e7-b97c-0cc47a6bebee\t354\t12\t96.72131147540983\na59f5e6a-2c33-11e7-b97c-0cc47a6bebee\t501\t18\t96.53179190751445\ne102dc43-2c35-11e7-b97c-0cc47a6bebee\t94\t8\t92.15686274509804\na61ae83f-2c33-11e7-b97c-0cc47a6bebee\t521\t18\t96.66048237476808\na91c86a6-2c33-11e7-b97c-0cc47a6bebee\t352\t12\t96.7032967032967\n961c99cc-2c33-11e7-b97c-0cc47a6bebee\t485\t18\t96.42147117296223\n9a5bf604-2c33-11e7-b97c-0cc47a6bebee\t512\t17\t96.78638941398866\n797b76e6-4ad5-11e7-a936-0cc47a6bebee\t584\t22\t96.36963696369637\n8c108b98-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\ne43792cb-2c33-11e7-b97c-0cc47a6bebee\t566\t20\t96.58703071672356\na8d5fd9e-2c33-11e7-b97c-0cc47a6bebee\t514\t17\t96.7984934086629\nb5c2c35f-2c33-11e7-b97c-0cc47a6bebee\t514\t14\t97.34848484848484\nb2b8aabc-2c33-11e7-b97c-0cc47a6bebee\t486\t17\t96.62027833001989\n66cd285c-b4da-11e8-ae05-002590e569f4\t513\t22\t95.88785046728971\n3b153d6c-2c35-11e7-b97c-0cc47a6bebee\t559\t22\t96.21342512908778\ne681062a-2c33-11e7-b97c-0cc47a6bebee\t124\t0\t100.0\n3a2f0a80-2c36-11e7-b97c-0cc47a6bebee\t373\t18\t95.39641943734016\na6024293-2c33-11e7-b97c-0cc47a6bebee\t474\t18\t96.34146341463415\nbba19721-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\na9cfe70a-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\na3ed3f19-2c33-11e7-b97c-0cc47a6bebee\t517\t16\t96.99812382739212\n98e0d4ba-2c33-11e7-b97c-0cc47a6bebee\t504\t16\t96.92307692307692\n7fdcd619-a7d8-11e8-ae05-002590e569f4\t564\t20\t96.57534246575342\nf3f50547-2c33-11e7-b97c-0cc47a6bebee\t479\t26\t94.85148514851485\ne3d6f4a1-2c35-11e7-b97c-0cc47a6bebee\t148\t8\t94.87179487179486\na9904bd8-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.6355140186916\na870ff88-2c33-11e7-b97c-0cc47a6bebee\t477\t12\t97.54601226993866\na90927d6-2c33-11e7-b97c-0cc47a6bebee\t66\t1\t98.50746268656717\n988248dd-2c33-11e7-b97c-0cc47a6bebee\t512\t18\t96.60377358490567\na575e5eb-2c33-11e7-b97c-0cc47a6bebee\t513\t18\t96.61016949152543\na8833a84-2c33-11e7-b97c-0cc47a6bebee\t422\t18\t95.9090909090909\n3b7f5871-2c36-11e7-b97c-0cc47a6bebee\t545\t19\t96.63120567375887\n2d07d061-2c34-11e7-b97c-0cc47a6bebee\t319\t15\t95.50898203592814\n8b196414-2c33-11e7-b97c-0cc47a6bebee\t492\t17\t96.66011787819254\n8b9bb78d-2c33-11e7-b97c-0cc47a6bebee\t498\t18\t96.51162790697676\n3a966180-2c35-11e7-b97c-0cc47a6bebee\t588\t22\t96.39344262295081\nc6d0b875-2c33-11e7-b97c-0cc47a6bebee\t445\t19\t95.90517241379311\na608179e-2c33-11e7-b97c-0cc47a6bebee\t338\t12\t96.57142857142857\nd35f7d85-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\na3c34395-2c33-11e7-b97c-0cc47a6bebee\t486\t18\t96.42857142857143\n98e6777b-2c33-11e7-b97c-0cc47a6bebee\t515\t18\t96.62288930581614\n39de68f6-2c36-11e7-b97c-0cc47a6bebee\t331\t12\t96.50145772594753\n47be3fa8-2c36-11e7-b97c-0cc47a6bebee\t325\t11\t96.72619047619048\na4190715-2c33-11e7-b97c-0cc47a6bebee\t507\t25\t95.30075187969925\nf058b1b1-2c33-11e7-b97c-0cc47a6bebee\t436\t14\t96.88888888888889\naabdf6dd-2c33-11e7-b97c-0cc47a6bebee\t509\t15\t97.13740458015268\nd36546ba-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\n6be276cb-b4da-11e8-ae05-002590e569f4\t488\t17\t96.63366336633663\na3a1e0f4-2c33-11e7-b97c-0cc47a6bebee\t512\t18\t96.60377358490567\n6ce027a5-c87a-11e7-b2b3-ac1f6b055fa6\t502\t18\t96.53846153846153\n23e59795-2c34-11e7-b97c-0cc47a6bebee\t348\t194\t64.20664206642066\na874054c-2c33-11e7-b97c-0cc47a6bebee\t514\t18\t96.61654135338345\na65bae74-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.6355140186916\n3a2a03dd-2c36-11e7-b97c-0cc47a6bebee\t364\t7\t98.11320754716981\n86653eee-ad58-11e8-ae05-002590e569f4\t567\t22\t96.26485568760611\n06e51545-2c35-11e7-b97c-0cc47a6bebee\t462\t17\t96.4509394572025\n67c022dc-b4da-11e8-ae05-002590e569f4\t568\t20\t96.5986394557823\n2945d835-2c34-11e7-b97c-0cc47a6bebee\t417\t18\t95.86206896551724\n2d2d1f6f-2c34-11e7-b97c-0cc47a6bebee\t517\t18\t96.6355140186916\n708c1a51-2c35-11e7-b97c-0cc47a6bebee\t377\t11\t97.16494845360825\ndf303b4b-a0c5-11e8-ae05-002590e569f4\t580\t23\t96.18573797678275\n9dbf9757-2c33-11e7-b97c-0cc47a6bebee\t486\t22\t95.66929133858267\nb45d387c-2c33-11e7-b97c-0cc47a6bebee\t484\t18\t96.41434262948208\n38bbca56-2c36-11e7-b97c-0cc47a6bebee\t356\t12\t96.73913043478261\n5880acad-2c33-11e7-b97c-0cc47a6bebee\t521\t17\t96.84014869888475\nd922b970-2c35-11e7-b97c-0cc47a6bebee\t185\t0\t100.0\n9926bc4e-2c33-11e7-b97c-0cc47a6bebee\t488\t18\t96.44268774703558\nd361b8da-2c33-11e7-b97c-0cc47a6bebee\t516\t18\t96.62921348314607\n53240fc2-2c35-11e7-b97c-0cc47a6bebee\t491\t20\t96.08610567514677\na9ad2555-2c33-11e7-b97c-0cc47a6bebee\t517\t20\t96.2756052141527\n69f36b7c-2c33-11e7-b97c-0cc47a6bebee\t496\t36\t93.23308270676691\n89ce0310-2c36-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\na9476f00-2c33-11e7-b97c-0cc47a6bebee\t445\t18\t96.11231101511879\n68f96ef2-b4da-11e8-ae05-002590e569f4\t572\t20\t96.62162162162163\n43955b29-2c36-11e7-b97c-0cc47a6bebee\t310\t12\t96.27329192546584\nb4523d73-2c33-11e7-b97c-0cc47a6bebee\t285\t10\t96.61016949152543\ne925ddf6-2c33-11e7-b97c-0cc47a6bebee\t509\t16\t96.95238095238096\ne0fd97d1-2c35-11e7-b97c-0cc47a6bebee\t186\t8\t95.87628865979381\ne0fcc859-2c35-11e7-b97c-0cc47a6bebee\t101\t8\t92.66055045871559\na877e22a-2c33-11e7-b97c-0cc47a6bebee\t514\t17\t96.7984934086629\n0b58d41a-2c34-11e7-b97c-0cc47a6bebee\t512\t18\t96.60377358490567\nb7abd6aa-2c33-11e7-b97c-0cc47a6bebee\t516\t16\t96.99248120300751\na6816c95-2c33-11e7-b97c-0cc47a6bebee\t429\t16\t96.40449438202248\nf2629814-2c33-11e7-b97c-0cc47a6bebee\t476\t18\t96.35627530364373\nb7ea79d4-2c33-11e7-b97c-0cc47a6bebee\t506\t18\t96.56488549618321\n21200df5-2c34-11e7-b97c-0cc47a6bebee\t506\t18\t96.56488549618321\naa04e6f6-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n688ffc6e-b4da-11e8-ae05-002590e569f4\t119\t0\t100.0\naa0a4c70-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\n87a310d5-8da0-11e7-9e41-0cc47adc2912\t423\t19\t95.70135746606336\na31ee70b-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\n3ae191ac-2c36-11e7-b97c-0cc47a6bebee\t195\t8\t96.05911330049261\n38841d29-2c36-11e7-b97c-0cc47a6bebee\t299\t10\t96.76375404530745\n2d05a7cb-2c34-11e7-b97c-0cc47a6bebee\t444\t13\t97.15536105032822\na6571f32-2c33-11e7-b97c-0cc47a6bebee\t323\t2\t99.38461538461539\na3fc849a-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\n91bd9d5e-8da0-11e7-9e41-0cc47adc2912\t576\t24\t96.0\n98ee92c6-2c33-11e7-b97c-0cc47a6bebee\t502\t18\t96.53846153846153\na41e75e2-2c33-11e7-b97c-0cc47a6bebee\t501\t17\t96.71814671814671\n85280495-8da0-11e7-9e41-0cc47adc2912\t572\t22\t96.29629629629629\na41fff8b-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\na81e10e5-2c33-11e7-b97c-0cc47a6bebee\t504\t18\t96.55172413793103\n9ae52576-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\nd38b1286-2c33-11e7-b97c-0cc47a6bebee\t486\t14\t97.2\naa91a6dd-2c33-11e7-b97c-0cc47a6bebee\t488\t28\t94.57364341085271\na1a65b59-2c33-11e7-b97c-0cc47a6bebee\t500\t16\t96.89922480620154\n5a3d7358-2c35-11e7-b97c-0cc47a6bebee\t421\t15\t96.55963302752293\nb2ce34d0-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\n481dd50e-2c36-11e7-b97c-0cc47a6bebee\t190\t8\t95.95959595959596\n25c875ae-2c34-11e7-b97c-0cc47a6bebee\t267\t18\t93.6842105263158\na57044ea-2c33-11e7-b97c-0cc47a6bebee\t366\t10\t97.3404255319149\ncac058ae-b858-11e8-ae05-002590e569f4\t441\t11\t97.56637168141593\nd9b98383-2c35-11e7-b97c-0cc47a6bebee\t59\t0\t100.0\n94781424-8da0-11e7-9e41-0cc47adc2912\t470\t17\t96.50924024640656\n2ea09a91-2c33-11e7-b97c-0cc47a6bebee\t403\t18\t95.72446555819477\ne9d577e8-bfee-11e7-b2b3-ac1f6b055fa6\t416\t15\t96.51972157772622\n404f96c3-cd90-11e8-ae05-002590e569f4\t573\t25\t95.81939799331104\n7d0b4ed7-9f33-11e8-ae05-002590e569f4\t364\t12\t96.80851063829788\na522952f-2c33-11e7-b97c-0cc47a6bebee\t485\t18\t96.42147117296223\n8ba985dc-9f33-11e8-ae05-002590e569f4\t552\t22\t96.16724738675958\na66f23b9-2c33-11e7-b97c-0cc47a6bebee\t441\t11\t97.56637168141593\nda67f192-2c35-11e7-b97c-0cc47a6bebee\t334\t12\t96.53179190751445\n9c75fd63-2c33-11e7-b97c-0cc47a6bebee\t452\t14\t96.99570815450643\n2d816769-2c34-11e7-b97c-0cc47a6bebee\t435\t16\t96.45232815964523\ne4412a6f-2c33-11e7-b97c-0cc47a6bebee\t567\t22\t96.26485568760611\ne0f2b99b-2c35-11e7-b97c-0cc47a6bebee\t73\t4\t94.8051948051948\na5c21411-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\na5ba07ee-2c33-11e7-b97c-0cc47a6bebee\t268\t8\t97.10144927536231\n088c626c-9cd8-11e8-ae05-002590e569f4\t576\t20\t96.64429530201343\na6c648e2-2c33-11e7-b97c-0cc47a6bebee\t485\t18\t96.42147117296223\n47c76e82-2c36-11e7-b97c-0cc47a6bebee\t509\t18\t96.58444022770398\nddfa92dc-2c35-11e7-b97c-0cc47a6bebee\t193\t8\t96.01990049751244\na345141e-2c33-11e7-b97c-0cc47a6bebee\t515\t17\t96.80451127819549\naa4fafa3-2c33-11e7-b97c-0cc47a6bebee\t476\t16\t96.7479674796748\n3e095a07-2c35-11e7-b97c-0cc47a6bebee\t514\t17\t96.7984934086629\n1b0ddd0a-5768-11e7-b1dd-0cc47adc2912\t426\t16\t96.38009049773756\na38487c8-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\nc6fc758e-2c33-11e7-b97c-0cc47a6bebee\t502\t17\t96.72447013487476\n98e79ed4-2c33-11e7-b97c-0cc47a6bebee\t474\t18\t96.34146341463415\na5605422-2c33-11e7-b97c-0cc47a6bebee\t408\t0\t100.0\na51005f6-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\na53e9222-2c33-11e7-b97c-0cc47a6bebee\t397\t12\t97.06601466992664\n8c11c0b8-2c33-11e7-b97c-0cc47a6bebee\t516\t20\t96.26865671641791\ne1a28c5d-2c35-11e7-b97c-0cc47a6bebee\t169\t20\t89.41798941798942\n98f195b2-2c33-11e7-b97c-0cc47a6bebee\t502\t18\t96.53846153846153\na456350a-2c33-11e7-b97c-0cc47a6bebee\t475\t18\t96.34888438133873\nd90e3aeb-2c35-11e7-b97c-0cc47a6bebee\t252\t15\t94.3820224719101\na92b8a2f-2c33-11e7-b97c-0cc47a6bebee\t518\t19\t96.46182495344506\n058c4ad5-2c34-11e7-b97c-0cc47a6bebee\t582\t22\t96.35761589403974\n6a33a635-b4da-11e8-ae05-002590e569f4\t572\t20\t96.62162162162163\n69cbf1d7-b4da-11e8-ae05-002590e569f4\t486\t17\t96.62027833001989\nb23ba04f-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n3a1e07aa-2c36-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\nfca96d09-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\nd3839d93-2c33-11e7-b97c-0cc47a6bebee\t494\t18\t96.484375\na832b45d-2c33-11e7-b97c-0cc47a6bebee\t520\t20\t96.29629629629629\n5a45fcc8-2c35-11e7-b97c-0cc47a6bebee\t516\t18\t96.62921348314607\n69eb251e-2c33-11e7-b97c-0cc47a6bebee\t243\t11\t95.66929133858267\nd3603550-2c33-11e7-b97c-0cc47a6bebee\t491\t17\t96.65354330708661\n7b8c5fb3-9f33-11e8-ae05-002590e569f4\t534\t20\t96.38989169675091\naa1c7486-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\n298d57ce-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n96218bcf-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\n0b5be446-2c34-11e7-b97c-0cc47a6bebee\t516\t17\t96.81050656660413\n9ab68069-2c33-11e7-b97c-0cc47a6bebee\t518\t18\t96.64179104477611\na40cefef-2c33-11e7-b97c-0cc47a6bebee\t489\t18\t96.44970414201184\na4036268-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\n994a1b81-2c33-11e7-b97c-0cc47a6bebee\t8\t0\t100.0\n37ebb138-2c36-11e7-b97c-0cc47a6bebee\t327\t11\t96.7455621301775\naa35be1c-2c33-11e7-b97c-0cc47a6bebee\t522\t18\t96.66666666666667\n2e63e138-2c34-11e7-b97c-0cc47a6bebee\t490\t18\t96.45669291338582\nb22dd217-2c33-11e7-b97c-0cc47a6bebee\t484\t13\t97.38430583501007\n3e122352-2c35-11e7-b97c-0cc47a6bebee\t516\t22\t95.91078066914498\n53c9abc3-2c35-11e7-b97c-0cc47a6bebee\t519\t18\t96.64804469273743\nde9bceb1-a0c5-11e8-ae05-002590e569f4\t513\t18\t96.61016949152543\na5a2c15f-2c33-11e7-b97c-0cc47a6bebee\t461\t17\t96.44351464435147\n484bb4de-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\nd9068715-2c35-11e7-b97c-0cc47a6bebee\t264\t29\t90.10238907849829\n0b2eb58b-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\na70f4c65-2c33-11e7-b97c-0cc47a6bebee\t425\t15\t96.5909090909091\n44de3ddf-2c36-11e7-b97c-0cc47a6bebee\t302\t12\t96.17834394904459\na6762f1b-2c33-11e7-b97c-0cc47a6bebee\t519\t20\t96.28942486085343\n645d3ef1-b4da-11e8-ae05-002590e569f4\t582\t20\t96.67774086378738\na5311f92-2c33-11e7-b97c-0cc47a6bebee\t381\t14\t96.45569620253166\nf40d0c51-2c33-11e7-b97c-0cc47a6bebee\t507\t18\t96.57142857142857\n93438bf9-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\n97110ab9-2c33-11e7-b97c-0cc47a6bebee\t376\t6\t98.42931937172776\nb292de0c-2c33-11e7-b97c-0cc47a6bebee\t180\t0\t100.0\na39287f4-2c33-11e7-b97c-0cc47a6bebee\t510\t18\t96.5909090909091\n3e0f626e-2c35-11e7-b97c-0cc47a6bebee\t455\t16\t96.60297239915074\n45ee788c-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7032967032967\n0f167849-9cd8-11e8-ae05-002590e569f4\t574\t23\t96.14740368509213\n9e1aa497-bb34-11e7-b2b3-ac1f6b055fa6\t457\t18\t96.21052631578947\ne061862c-a0c5-11e8-ae05-002590e569f4\t310\t0\t100.0\naafe7941-2c33-11e7-b97c-0cc47a6bebee\t188\t10\t94.94949494949495\n37ba84b1-2c36-11e7-b97c-0cc47a6bebee\t344\t12\t96.62921348314607\nd10eb2d9-2c33-11e7-b97c-0cc47a6bebee\t478\t33\t93.54207436399217\n737332a3-2c36-11e7-b97c-0cc47a6bebee\t510\t18\t96.5909090909091\n37cfb1f7-2c36-11e7-b97c-0cc47a6bebee\t352\t12\t96.7032967032967\nf7c93dd4-2c35-11e7-b97c-0cc47a6bebee\t429\t17\t96.18834080717488\n49857004-2c35-11e7-b97c-0cc47a6bebee\t501\t24\t95.42857142857143\na955d3f4-2c33-11e7-b97c-0cc47a6bebee\t339\t0\t100.0\na8124ada-2c33-11e7-b97c-0cc47a6bebee\t449\t13\t97.18614718614718\na7b92741-2c33-11e7-b97c-0cc47a6bebee\t338\t12\t96.57142857142857\n6f45f4a2-b4da-11e8-ae05-002590e569f4\t556\t20\t96.52777777777779\na4590cd8-2c33-11e7-b97c-0cc47a6bebee\t483\t17\t96.6\n2d09493b-2c34-11e7-b97c-0cc47a6bebee\t274\t19\t93.51535836177474\na45714bc-2c33-11e7-b97c-0cc47a6bebee\t276\t9\t96.84210526315789\n67646d0a-c87a-11e7-b2b3-ac1f6b055fa6\t521\t18\t96.66048237476808\nd921341d-2c35-11e7-b97c-0cc47a6bebee\t509\t18\t96.58444022770398\na6bc07ad-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.6355140186916\nd8f9bda9-2c35-11e7-b97c-0cc47a6bebee\t506\t21\t96.01518026565465\n96cfdd87-2c33-11e7-b97c-0cc47a6bebee\t506\t31\t94.22718808193669\naa0312a3-2c33-11e7-b97c-0cc47a6bebee\t483\t18\t96.40718562874252\na8f15050-2c33-11e7-b97c-0cc47a6bebee\t517\t18\t96.6355140186916\n3c488c14-2c36-11e7-b97c-0cc47a6bebee\t3\t3\t50.0\na6588f4d-2c33-11e7-b97c-0cc47a6bebee\t496\t16\t96.875\na3edf4a9-2c33-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\nf3ff2ae9-2c33-11e7-b97c-0cc47a6bebee\t225\t4\t98.2532751091703\n3acac8b8-2c36-11e7-b97c-0cc47a6bebee\t184\t4\t97.87234042553192\n90042b88-8da0-11e7-9e41-0cc47adc2912\t465\t17\t96.47302904564316\n293e7003-2c34-11e7-b97c-0cc47a6bebee\t520\t18\t96.6542750929368\nb2609540-2c33-11e7-b97c-0cc47a6bebee\t491\t17\t96.65354330708661\na4103cff-2c33-11e7-b97c-0cc47a6bebee\t352\t12\t96.7032967032967\nb2d9cfc2-2c33-11e7-b97c-0cc47a6bebee\t519\t18\t96.64804469273743\n311d1df2-2c34-11e7-b97c-0cc47a6bebee\t90\t3\t96.7741935483871\nd902a2ef-2c35-11e7-b97c-0cc47a6bebee\t356\t12\t96.73913043478261\nea1a3ebe-2c33-11e7-b97c-0cc47a6bebee\t524\t18\t96.6789667896679\naa762102-2c33-11e7-b97c-0cc47a6bebee\t225\t6\t97.40259740259741\nea8c3e98-2c33-11e7-b97c-0cc47a6bebee\t414\t15\t96.5034965034965\n539e0bff-2c35-11e7-b97c-0cc47a6bebee\t459\t18\t96.22641509433963\n96a8cb29-2c33-11e7-b97c-0cc47a6bebee\t513\t18\t96.61016949152543\n2e656559-2c34-11e7-b97c-0cc47a6bebee\t123\t0\t100.0\nc6fe1fd3-2c33-11e7-b97c-0cc47a6bebee\t487\t18\t96.43564356435644\n9a72350f-2c33-11e7-b97c-0cc47a6bebee\t352\t12\t96.7032967032967\n3ae2588e-2c36-11e7-b97c-0cc47a6bebee\t185\t20\t90.2439024390244\n9717aac9-2c33-11e7-b97c-0cc47a6bebee\t510\t17\t96.7741935483871\n632916ae-b4da-11e8-ae05-002590e569f4\t548\t23\t95.97197898423818\n3b0b5bda-2c35-11e7-b97c-0cc47a6bebee\t485\t23\t95.47244094488188\nda6eabfa-2c35-11e7-b97c-0cc47a6bebee\t500\t16\t96.89922480620154\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d13",
+            "http://172.17.0.2:4040/jobs/job?id\u003d14",
+            "http://172.17.0.2:4040/jobs/job?id\u003d15",
+            "http://172.17.0.2:4040/jobs/job?id\u003d16",
+            "http://172.17.0.2:4040/jobs/job?id\u003d17"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1564250079816_796828645",
+      "id": "20190727-175439_1625353861",
+      "dateCreated": "2019-07-27 17:54:39.816",
+      "dateStarted": "2019-07-27 20:48:50.741",
+      "dateFinished": "2019-07-27 20:49:12.000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nprintln(\"Duplicates rows: \" + (csvData.count() - csvUnique.count()))\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-27 20:50:22.321",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "device_identifier": "string",
+                      "sum(successes)": "string",
+                      "sum(failures)": "string",
+                      "ratio": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Duplicates rows: 53249\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d21",
+            "http://172.17.0.2:4040/jobs/job?id\u003d22"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1564256008076_43727360",
+      "id": "20190727-193328_1248123154",
+      "dateCreated": "2019-07-27 19:33:28.076",
+      "dateStarted": "2019-07-27 20:50:22.378",
+      "dateFinished": "2019-07-27 20:50:28.878",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-27 20:49:45.387",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1564257095160_-1965767641",
+      "id": "20190727-195135_1467448254",
+      "dateCreated": "2019-07-27 19:51:35.161",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "SamKnows",
+  "id": "2EJXYS9U9",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
